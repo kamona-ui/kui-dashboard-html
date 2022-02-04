@@ -1,0 +1,70 @@
+<!-- Sidebar header -->
+<div class="flex items-center justify-between flex-shrink-0 px-3">
+    <!-- Logo -->
+    <a href="dashboard.html" class="inline-flex items-center">
+        @!component('components/logo', {
+            'aria-hidden': 'true',
+            'class': 'w-10 h-auto'
+        })
+        <span class="sr-only">Dashbaord home</span>
+    </a>
+
+    <!-- Toggle button -->
+    @component('components/button', {
+        iconOnly: true,
+        variant: 'secondary',
+        '@click': "isSidebarOpen = !isSidebarOpen",
+        srText: 'Toggle sidebar',
+        'x-show': 'isSidebarOpen || isSidebarHovered'
+    })
+      @slot('main', scope)
+        <span class="sr-only">Toggle sidebar</span>
+        <!-- menu-fold-right icon -->
+        <svg
+            x-show="!isSidebarOpen"
+            aria-hidden="true"
+            class="{{ scope.iconSizeClasses }} hidden lg:block"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        <!-- menu-fold-left icon -->
+        <svg
+            x-show="isSidebarOpen"
+            aria-hidden="true"
+            class="{{ scope.iconSizeClasses }} hidden lg:block"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+        <path
+            d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+        </svg>
+
+        <!-- x icon -->
+        <svg
+            aria-hidden="true"
+            class="{{ scope.iconSizeClasses }} lg:hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      @end
+    @endcomponent
+</div>

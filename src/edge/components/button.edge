@@ -1,0 +1,98 @@
+@set('baseClasses', 'inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2')
+@set('variantClasses', '')
+@set('sizeClasses', '')
+@set('iconSizeClasses', '')
+@set('roundedClasses', '')
+
+{{--  Variant classes  --}}
+@if(variant == 'secondary')
+  @set('variantClasses', 'bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200')
+@elseif(variant == 'success')
+  @set('variantClasses', 'bg-green-500 text-white hover:bg-green-600 focus:ring-green-500')
+@elseif(variant == 'danger')
+  @set('variantClasses', 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500')
+@elseif(variant == 'warning')
+  @set('variantClasses', 'bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-500')
+@elseif(variant == 'info')
+  @set('variantClasses', 'bg-cyan-500 text-white hover:bg-cyan-600 focus:ring-cyan-500')
+@elseif(variant == 'black')
+  @set('variantClasses', 'bg-black text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-black dark:hover:bg-dark-eval-3')
+@else
+  @set('variantClasses', 'bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500')
+@endif
+
+{{--  Size classes  --}}
+@if(size == 'sm')
+    @if(iconOnly)
+        @set('sizeClasses', 'p-1.5')
+    @else
+        @set('sizeClasses', 'px-2.5 py-1.5 text-sm')
+    @endif
+@elseif(size == 'lg')
+    @if(iconOnly)
+        @set('sizeClasses', 'p-3')
+    @else
+        @set('sizeClasses', 'px-5 py-2 text-xl')
+    @endif
+@else
+    @if(iconOnly)
+        @set('sizeClasses', 'p-2')
+    @else
+        @set('sizeClasses', 'px-4 py-2 text-base')  
+    @endif
+@endif
+
+{{--  Icon size classes  --}}
+@if(size == 'sm')
+    @set('iconSizeClasses', 'w-5 h-5') 
+@elseif(size == 'lg')
+    @set('iconSizeClasses', 'w-7 h-7')
+@else
+    @set('iconSizeClasses', 'w-6 h-6')
+@endif
+
+{{--  Rounded class  --}}
+@if(squared)
+    @set('roundedClasses', '') 
+@elseif(pill)
+    @set('roundedClasses', 'rounded-full')
+@else
+    @set('roundedClasses', 'rounded-md')
+@endif
+
+
+@if(href)
+    <a 
+        href="{{ href }}" 
+        aria-disabled="{{ disabled ? 'true' : 'false' }}"
+        class="{{ classes ?? '' }} {{ baseClasses }} {{ variantClasses }} {{ sizeClasses }} {{ roundedClasses }} {{ disabled ? 'pointer-events-none opacity-50' : '' }}"
+        {{ $props.serializeOnly(["@click", "target", "x-show"]) }}
+    >
+        @if(srText)
+            <span class="sr-only">{{ srText }}</span>
+        @endif
+
+        @if($slots.main)
+            {{{ await $slots.main?.({iconSizeClasses}) }}}
+        @else
+            {{ text ?? '' }}
+        @endif
+    </a>
+@else
+    <button 
+        type="{{ type ?? 'button' }}" 
+        class="{{ classes ?? '' }} {{ baseClasses }} {{ variantClasses }} {{ sizeClasses }} {{ roundedClasses }}"
+        {{ $props.serializeOnly(["@click", "disabled", ":disabled", "x-show"]) }}
+    >
+        @if(srText)
+            <span class="sr-only">{{ srText }}</span>
+        @endif
+
+        @if($slots.main)
+            {{{ await $slots.main?.({iconSizeClasses}) }}}
+        @else
+            {{ text ?? '' }}
+        @endif
+        
+    </button>
+@endif

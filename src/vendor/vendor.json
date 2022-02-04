@@ -1,0 +1,42 @@
+{
+  "vendors": {
+    "alpinejs": {
+      "js": {
+        "from": "./node_modules/alpinejs/dist/cdn.min.js",
+        "to": "./public/assets/js/vendor/alpinejs.min.js"
+      }
+    },
+    "@alpinejs/collapse": {
+      "js": {
+        "from": "./node_modules/@alpinejs/collapse/dist/cdn.min.js",
+        "to": "./public/assets/js/vendor/alpinejs-collapse.min.js"
+      }
+    },
+    "gsap": {
+      "js": {
+        "from": "./node_modules/gsap/dist/gsap.min.js",
+        "to": "./public/assets/js/vendor/gsap.min.js"
+      }
+    },
+    "perfect-scrollbar": {
+      "js": {
+        "from": "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+        "to": "./public/assets/js/vendor/perfect-scrollbar.min.js"
+      },
+      "css": {
+        "from": "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+        "to": "./public/assets/css/vendor/perfect-scrollbar.css"
+      }
+    },
+    "egalink-toasty.js": {
+      "js": {
+        "from": "./node_modules/egalink-toasty.js/dist/toasty.min.js",
+        "to": "./public/assets/js/vendor/toasty.min.js"
+      },
+      "css": {
+        "from": "./node_modules/egalink-toasty.js/dist/toasty.min.css",
+        "to": "./public/assets/css/vendor/toasty.min.css"
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+@layout('layouts/landing-page-layout')
+
+@set('title', 'Admin Dashboard Template')
+
+@section('content')
+    <section class="relative min-h-screen overflow-hidden bg-gradient-to-tr from-purple-500 via-blue-300 to-indigo-400 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-800">
+        <h2 class="sr-only">Showcase</h2>
+        <!--  Background  -->
+        <div class="absolute inset-x-[-10vw] top-0 bottom-20 md:bottom-0 md:top-24 rounded-[77vw/50vw] rounded-t-none md:rounded-b-none md:rounded-[77vw/50vw] bg-white dark:bg-dark-bg"></div>
+
+        <div class="px-6 pb-24 mx-auto md:pt-28 max-w-7xl">
+            <div class="grid gap-5 perspective-100vw md:grid-cols-4 md:grid-rows-1">
+                {{--  Left  --}}
+                <div class="items-center justify-center hidden md:flex transform-style-3d">
+                    <div
+                        id="mobile2Showcase"
+                        class="flex items-center justify-center w-full h-full rotate-x-25 rotate-y-25 rotate-z--15"
+                    >
+                        <img x-show="!isDarkMode" src="assets/images/showcase/mobile-light-2.svg" class="h-auto w-[70%] drop-shadow-2xl" />
+                        <img x-show="isDarkMode" src="assets/images/showcase/mobile-dark-2.svg" class="h-auto w-[70%] drop-shadow-2xl" />
+                    </div>
+                </div>
+
+                {{--  Center  --}}
+                <div class="flex flex-col items-center justify-center col-span-3 row-start-2 gap-10 transform-style-3d md:pb-18 md:row-start-1 md:col-span-2 md:col-start-2">
+                    <div class="flex items-center justify-center mt-10 md:mt-4 transform-style-3d">
+                        <img
+                            x-show="!isDarkMode"
+                            id="desktopShowcase"
+                            class="rotate-x-15 w-[75%] md:w-full"
+                            src="assets/images/showcase/desktop-light.svg"
+                            alt="Desktop showcase"
+                        />
+                        <img
+                            x-show="isDarkMode"
+                            id="desktopShowcase"
+                            class="rotate-x-15 w-[75%] md:w-full"
+                            src="assets/images/showcase/desktop-dark.svg"
+                            alt="Desktop showcase"
+                        />
+                    </div>
+
+                    <!-- CTA Buttons  -->
+                    <div class="flex flex-col items-center justify-center gap-6 lg:flex-row">
+                        <!-- Live preview button -->
+                        @component('components/button', {
+                            variant: 'primary',
+                            classes: 'gap-2',
+                            href: 'dashboard.html'
+                        })
+                            <!-- Eye icon -->
+                            @slot('main', scope)
+                                <svg aria-hidden="true" class="{{ scope.iconSizeClasses }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <span class="whitespace-nowrap">Live Preview</span>
+                            @end
+                        @endcomponent
+
+                        <!-- Github link -->
+                        @component('components/button', {
+                            variant: 'black',
+                            classes: 'gap-2',
+                            href: 'https://github.com/kamona-ui/kui-dashboard-html',
+                            target: '_blank'
+                        })
+                            <!-- Github icon -->
+                            @slot('main', scope)
+                                <svg aria-hidden="true" class="{{ scope.iconSizeClasses }}" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"></path></svg>
+                                <span class="whitespace-nowrap">Github</span>
+                            @end
+                        @endcomponent
+
+                        <!-- Figma file link -->
+                        @component('components/button', {
+                            variant: 'info',
+                            classes: 'gap-2',
+                            href: 'https://www.figma.com/community/file/1019844542917981418/',
+                            target: '_blank'
+                        })
+                            <!-- Figma icon -->
+                            @slot('main', scope)
+                            <svg aria-hidden="true" class="{{ scope.iconSizeClasses }}" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M15.332 8.668a3.333 3.333 0 0 0 0-6.663H8.668a3.333 3.333 0 0 0 0 6.663 3.333 3.333 0 0 0 0 6.665 3.333 3.333 0 0 0 0 6.664A3.334 3.334 0 0 0 12 18.664V8.668h3.332z"></path><circle cx="15.332" cy="12" r="3.332"></circle></svg>
+                                <span class="whitespace-nowrap">Figma File</span>
+                            @end
+                        @endcomponent
+                    </div>
+                </div>
+
+                {{--  Right  --}}
+                <div class="items-center justify-center hidden md:flex transform-style-3d">
+                    <div
+                        id="mobile1Showcase"
+                        class="flex items-center justify-center w-full h-full rotate-x-25 rotate-y--25 rotate-z-15"
+                    >
+                        <img x-show="!isDarkMode" src="assets/images/showcase/mobile-light.svg" class="h-auto w-[70%] drop-shadow-2xl" />
+                        <img x-show="isDarkMode" src="assets/images/showcase/mobile-dark.svg" class="h-auto w-[70%] drop-shadow-2xl" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@end

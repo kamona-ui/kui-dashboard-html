@@ -1,0 +1,61 @@
+{
+  "name": "kui-dashboard-html",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Admin dashboard template built with tailwindcss & alpinejs.",
+  "author": {
+    "name": "Kamona UI",
+    "email": "kamonaui@gmail.com",
+    "url": "https://github.com/kamona-ui"
+  },
+  "keywords": [
+    "dashboard",
+    "tailwindcss",
+    "layout",
+    "alpinejs",
+    "admin",
+    "template"
+  ],
+  "scripts": {
+    "dev": "run-p js:watch html:watch css:watch vendor images serve",
+    "build": "run-s js:build html:build css:build vendor images prettier",
+    "serve": "node build/cli serve -w",
+    "preview": "node build/cli serve",
+    "html:build": "node build/cli html",
+    "html:watch": "node build/cli html -w",
+    "js:build": "node build/cli js",
+    "js:watch": "node build/cli js -w",
+    "css:build": "tailwind -i ./src/assets/css/main.css -o public/assets/css/main.css -m",
+    "css:watch": "tailwind -i ./src/assets/css/main.css -o public/assets/css/main.css -w",
+    "prettier": "prettier --write public/**/*.html",
+    "vendor": "node build/cli vendor",
+    "images": "node build/cli images",
+    "deploy": "gh-pages -d public",
+    "cli": "node build/cli"
+  },
+  "devDependencies": {
+    "@alpinejs/collapse": "^3.8.1",
+    "@tailwindcss/forms": "^0.4.0",
+    "alpinejs": "^3.8.1",
+    "apexcharts": "^3.33.0",
+    "autoprefixer": "^10.4.2",
+    "browser-sync": "^2.27.7",
+    "chalk": "4.1.2",
+    "commander": "^9.0.0",
+    "edge.js": "^5.3.2",
+    "egalink-toasty.js": "^1.5.5",
+    "esbuild": "^0.14.18",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.0.0",
+    "gh-pages": "^3.2.3",
+    "gsap": "^3.9.1",
+    "liquidjs": "^9.34.0",
+    "normalize-path": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "perfect-scrollbar": "^1.5.5",
+    "postcss": "^8.4.6",
+    "postcss-import": "^14.0.2",
+    "prettier": "^2.5.1",
+    "tailwindcss": "^3.0.18"
+  }
+}
