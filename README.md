@@ -10,6 +10,8 @@
 
 ##### [Vue JSX version](https://github.com/kamona-ui/kui-dashboard-vue-jsx/)
 
+##### [Laravel Package](https://github.com/Kamona-WD/kui-laravel-breeze/)
+
 ##### To get started:
 
 ```bash
