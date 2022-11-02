@@ -1,0 +1,168 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Console\Application;
+use Illuminate\Console\Command;
+
+class App extends Container
+{
+    public function isDownForMaintenance(): bool
+    {
+        return false;
+    }
+
+    public function environment(...$environments)
+    {
+        if(empty($environments)) {
+            return 'blade';
+        }
+
+        return in_array(
+            'blade',
+            is_array($environments[0]) ? $environments[0] : $environments
+        );
+    }
+
+    public function getNamespace()
+    {
+        return 'App\\';
+    }
+}
+
+class BladeBuild extends Command
+{
+    protected $pathsToTemplates = [];
+    protected $pathToCompiledTemplates = __DIR__ . '/blade_cache';
+
+    protected $container;
+    protected $filesystem;
+    protected $eventDispatcher;
+    protected $viewResolver;
+    protected $bladeCompiler;
+    protected $viewFinder;
+    protected $viewFactory;
+
+    protected $signature = 'blade:compile
+                            {--root=src/blade}
+                            {--pages-dir=pages}
+                            {--pages-glop="**"}
+                            {--output-dir=public}
+                            ';
+
+    protected $description = 'Compile blade files to html.';
+
+    public function __construct($container)
+    {
+        parent::__construct();
+        $this->container = $container;
+    }
+
+    public function handle()
+    {
+        $this->prepare();
+        $this->compile();
+        $this->line('');
+        $this->comment('Done');
+    }
+
+    protected function prepare()
+    {
+        $this->pathsToTemplates = app('config')->get('view.paths');
+        $this->pathToCompiledTemplates = app('config')->get('view.compiled');
+
+        $this->filesystem = new \Illuminate\Filesystem\Filesystem;
+        $this->eventDispatcher = new \Illuminate\Events\Dispatcher($this->container);
+        $this->viewResolver = new \Illuminate\View\Engines\EngineResolver;
+        $this->bladeCompiler = new \Illuminate\View\Compilers\BladeCompiler($this->filesystem, $this->pathToCompiledTemplates);
+
+        $this->bladeCompiler->component('dynamic-component', \Illuminate\View\DynamicComponent::class);
+
+        $this->viewResolver->register('blade', function () {
+            return new \Illuminate\View\Engines\CompilerEngine($this->bladeCompiler);
+        });
+
+        $this->viewFinder = new \Illuminate\View\FileViewFinder($this->filesystem, $this->pathsToTemplates);
+        $this->viewFactory = new \Illuminate\View\Factory($this->viewResolver, $this->viewFinder, $this->eventDispatcher);
+        $this->viewFactory->setContainer($this->container);
+        \Illuminate\Support\Facades\Facade::setFacadeApplication($this->container);
+        $this->container->instance(\Illuminate\Contracts\View\Factory::class, $this->viewFactory);
+        $this->container->alias(
+            \Illuminate\Contracts\View\Factory::class, 
+            (new class extends \Illuminate\Support\Facades\View {
+                public static function getFacadeAccessor() { return parent::getFacadeAccessor(); }
+            })::getFacadeAccessor()
+        );
+        $this->container->instance(\Illuminate\View\Compilers\BladeCompiler::class, $this->bladeCompiler);
+        $this->container->alias(
+            \Illuminate\View\Compilers\BladeCompiler::class, 
+            (new class extends \Illuminate\Support\Facades\Blade {
+                public static function getFacadeAccessor() { return parent::getFacadeAccessor(); }
+            })::getFacadeAccessor()
+        );
+    }
+
+    public function compile()
+    {
+        $compiledPages = [];
+        $pages = $this->filesystem->glob($this->option('root') . DIRECTORY_SEPARATOR . $this->option('pages-dir') . DIRECTORY_SEPARATOR . '**');
+
+        $bar = $this->output->createProgressBar(count($pages));
+        $bar->start();
+
+        foreach($pages as $page) {
+            $view = str_replace('.blade', '', $this->filesystem->name($page));
+
+            $html = $this->viewFactory->make($this->option('pages-dir') . '.' . $view, [])->render();
+
+            $this->filesystem->ensureDirectoryExists($this->option('output-dir'));
+            
+            var_dump($this->option('output-dir') . DIRECTORY_SEPARATOR . $view . '.html');
+            $this->filesystem->put($this->option('output-dir') . DIRECTORY_SEPARATOR . $view . '.html', $html);
+
+            array_push($compiledPages, $this->option('output-dir') . DIRECTORY_SEPARATOR . $view . ".html");
+
+            $bar->advance();
+        }
+
+        $bar->finish();
+
+        $this->line('');
+        $this->line('');
+
+        $this->info('Compiled pages:');
+
+        foreach($compiledPages as $page) {
+            $this->info("\t$page");
+        }
+    }
+}
+
+$container = App::getInstance();
+
+$container->instance(\Illuminate\Contracts\Foundation\Application::class, $container);
+$container['config'] = new \Illuminate\Config\Repository(require __DIR__ . '/config.php');
+
+if (! function_exists('app')) {
+    function app($abstract = null, array $parameters = [])
+    {
+        if (is_null($abstract)) {
+            return App::getInstance();
+        }
+
+        return App::getInstance()->make($abstract, $parameters);
+    }
+}
+
+$events = new Dispatcher($container);
+
+$artisan = new Application($container, $events, 'Version 1');
+
+$artisan->setName('Blade');
+
+$artisan->resolve(new BladeBuild($container));
+
+$artisan->run();

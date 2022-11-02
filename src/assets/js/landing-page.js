@@ -1,6 +1,6 @@
 document.addEventListener('alpine:init', () => {
   let toast = new Toasty({
-    autoClose: false,
+    autoClose: true,
   })
 
   gsap.to('#loading .logo', { y: -50, opacity: 0, duration: 0.5 })

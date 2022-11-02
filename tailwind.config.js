@@ -2,7 +2,11 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   darkMode: 'class',
-  content: ['./src/edge/**/*.{edge,html}', './src/js/**/*.js'],
+  content: [
+    './src/edge/**/*.{edge,html}', 
+    './src/blade/**/*.blade.php', 
+    './src/js/**/*.js'
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -14,7 +18,7 @@ module.exports = {
       },
       colors: {
         dark: {
-          bg: '#151823',
+          'eval-0': '#151823',
           'eval-1': '#222738',
           'eval-2': '#2A2F42',
           'eval-3': '#2C3142',

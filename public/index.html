@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>K UI - Admin Dashboard Template</title>
+    <link rel="icon" href="favicon.ico" />
+    <title>K UI Dashboard</title>
 
     <!-- Fonts -->
     <link
@@ -63,9 +64,17 @@
       <div class="left"></div>
       <div class="right"></div>
       <div class="logo">
-        <svg viewBox="0 0 40 40" fill="#A855F7" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
-          <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
+        <svg
+          viewBox="0 0 40 40"
+          fill="#A855F7"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z"
+          />
+          <path
+            d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z"
+          />
           <path
             d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
           />
@@ -77,7 +86,9 @@
     </div>
 
     <div :class="{ dark: isDarkMode }" x-data="globalState">
-      <div class="min-h-screen text-gray-900 bg-white dark:bg-dark-bg dark:text-gray-100">
+      <div
+        class="min-h-screen text-gray-900 bg-white dark:bg-dark-eval-0 dark:text-gray-100"
+      >
         <!--  Navbar  -->
         <nav
           class="fixed inset-x-0 bottom-0 z-20 transition-all duration-500 md:top-0 md:bottom-auto"
@@ -86,19 +97,28 @@
                     'shadow-t-lg md:shadow-lg bg-white dark:bg-gray-700': scrollingUp,
                 }"
         >
-          <div class="relative flex items-center justify-between p-4 mx-auto max-w-7xl md:h-24">
+          <div
+            class="relative flex items-center justify-between p-4 mx-auto max-w-7xl md:h-24"
+          >
             <!--  Logo  -->
-            <a href="#" class="inline-block p-2 bg-white rounded-md dark:bg-dark-eval-1">
+            <a
+              href="/"
+              class="inline-block p-2 bg-white rounded-md dark:bg-dark-eval-1"
+            >
               <span class="sr-only">Home</span>
               <svg
-                class="w-10 h-auto md:w-12"
                 aria-hidden="true"
+                class="w-10 h-auto md:w-12"
                 viewBox="0 0 40 40"
                 fill="#A855F7"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
-                <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
+                <path
+                  d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z"
+                />
+                <path
+                  d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z"
+                />
                 <path
                   d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
                 />
@@ -109,47 +129,23 @@
             </a>
 
             <!--  Toggle dark mode button  -->
-
             <button
-              type="button"
-              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
+              type="submit"
+              class="inline-flex items-center justify-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 p-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 rounded-md"
               @click="toggleDarkMode()"
             >
-              <span class="sr-only">toggle dark mode</span>
-
-              <!-- Moon icon -->
-              <svg
+              <iconify-icon
                 x-show="!isDarkMode"
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                ></path>
-              </svg>
-
-              <!-- Sun icon -->
-              <svg
+                icon="heroicons:sun"
+                width="24"
+              ></iconify-icon>
+              <iconify-icon
                 x-show="isDarkMode"
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                ></path>
-              </svg>
+                icon="heroicons:moon"
+                width="24"
+              ></iconify-icon>
+
+              <span class="sr-only">Toggle dark mode</span>
             </button>
           </div>
         </nav>
@@ -163,12 +159,16 @@
             <h2 class="sr-only">Showcase</h2>
             <!--  Background  -->
             <div
-              class="absolute inset-x-[-10vw] top-0 bottom-20 md:bottom-0 md:top-24 rounded-[77vw/50vw] rounded-t-none md:rounded-b-none md:rounded-[77vw/50vw] bg-white dark:bg-dark-bg"
+              class="absolute inset-x-[-10vw] top-0 bottom-20 md:bottom-0 md:top-24 rounded-[77vw/50vw] rounded-t-none md:rounded-b-none md:rounded-[77vw/50vw] bg-white dark:bg-dark-eval-0"
             ></div>
 
             <div class="px-6 pb-24 mx-auto md:pt-28 max-w-7xl">
-              <div class="grid gap-5 perspective-100vw md:grid-cols-4 md:grid-rows-1">
-                <div class="items-center justify-center hidden md:flex transform-style-3d">
+              <div
+                class="grid gap-5 perspective-100vw md:grid-cols-4 md:grid-rows-1"
+              >
+                <div
+                  class="items-center justify-center hidden md:flex transform-style-3d"
+                >
                   <div
                     id="mobile2Showcase"
                     class="flex items-center justify-center w-full h-full rotate-x-25 rotate-y-25 rotate-z--15"
@@ -189,7 +189,9 @@
                 <div
                   class="flex flex-col items-center justify-center col-span-3 row-start-2 gap-10 transform-style-3d md:pb-18 md:row-start-1 md:col-span-2 md:col-start-2"
                 >
-                  <div class="flex items-center justify-center mt-10 md:mt-4 transform-style-3d">
+                  <div
+                    class="flex items-center justify-center mt-10 md:mt-4 transform-style-3d"
+                  >
                     <img
                       x-show="!isDarkMode"
                       id="desktopShowcase"
@@ -207,88 +209,43 @@
                   </div>
 
                   <!-- CTA Buttons  -->
-                  <div class="flex flex-col items-center justify-center gap-6 lg:flex-row">
+                  <div
+                    class="flex flex-col items-center justify-center gap-6 lg:flex-row"
+                  >
                     <!-- Live preview button -->
-
                     <a
                       href="dashboard.html"
-                      aria-disabled="false"
-                      class="gap-2 inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500 px-4 py-2 text-base rounded-md"
+                      class="inline-flex items-center justify-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 px-4 py-2 text-base bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500 gap-2 rounded-md"
                     >
-                      <svg
+                      <iconify-icon
                         aria-hidden="true"
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        ></path>
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                        ></path>
-                      </svg>
+                        icon="ant-design:eye-outlined"
+                        width="24"
+                      ></iconify-icon>
+
                       <span class="whitespace-nowrap">Live Preview</span>
                     </a>
 
                     <!-- Github link -->
-
                     <a
                       href="https://github.com/kamona-ui/kui-dashboard-html"
-                      aria-disabled="false"
-                      class="gap-2 inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-black text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-black dark:hover:bg-dark-eval-3 px-4 py-2 text-base rounded-md"
+                      class="inline-flex items-center justify-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 px-4 py-2 text-base bg-black text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-black dark:hover:bg-dark-eval-3 gap-2 rounded-md"
                       target="_blank"
                     >
-                      <svg
+                      <iconify-icon
                         aria-hidden="true"
-                        class="w-6 h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"
-                        ></path>
-                      </svg>
+                        icon="ant-design:github-outlined"
+                        width="24"
+                      ></iconify-icon>
+
                       <span class="whitespace-nowrap">Github</span>
-                    </a>
-
-                    <!-- Figma file link -->
-
-                    <a
-                      href="https://www.figma.com/community/file/1019844542917981418/"
-                      aria-disabled="false"
-                      class="gap-2 inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-cyan-500 text-white hover:bg-cyan-600 focus:ring-cyan-500 px-4 py-2 text-base rounded-md"
-                      target="_blank"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="w-6 h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M15.332 8.668a3.333 3.333 0 0 0 0-6.663H8.668a3.333 3.333 0 0 0 0 6.663 3.333 3.333 0 0 0 0 6.665 3.333 3.333 0 0 0 0 6.664A3.334 3.334 0 0 0 12 18.664V8.668h3.332z"
-                        ></path>
-                        <circle cx="15.332" cy="12" r="3.332"></circle>
-                      </svg>
-                      <span class="whitespace-nowrap">Figma File</span>
                     </a>
                   </div>
                 </div>
 
-                <div class="items-center justify-center hidden md:flex transform-style-3d">
+                <div
+                  class="items-center justify-center hidden md:flex transform-style-3d"
+                >
                   <div
                     id="mobile1Showcase"
                     class="flex items-center justify-center w-full h-full rotate-x-25 rotate-y--25 rotate-z-15"
@@ -312,6 +269,7 @@
       </div>
     </div>
 
+    <script src="assets/js/vendor/iconify-icon.min.js"></script>
     <script src="assets/js/vendor/toasty.min.js"></script>
     <script src="assets/js/vendor/gsap.min.js"></script>
     <script src="assets/js/main.js"></script>

@@ -15,5 +15,6 @@
     "/assets/js/vendor/perfect-scrollbar.min.js": "/assets/js/vendor/perfect-scrollbar.min.js",
     "/assets/css/vendor/perfect-scrollbar.css": "/assets/css/vendor/perfect-scrollbar.css",
     "/assets/js/vendor/toasty.min.js": "/assets/js/vendor/toasty.min.js",
-    "/assets/css/vendor/toasty.min.css": "/assets/css/vendor/toasty.min.css"
+    "/assets/css/vendor/toasty.min.css": "/assets/css/vendor/toasty.min.css",
+    "/assets/js/vendor/iconify-icon.min.js": "/assets/js/vendor/iconify-icon.min.js"
 }
