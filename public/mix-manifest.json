@@ -1,0 +1,19 @@
+{
+    "/assets/js/landing-page.js": "/assets/js/landing-page.js",
+    "/assets/js/main.js": "/assets/js/main.js",
+    "/assets/css/main.css": "/assets/css/main.css",
+    "/assets/images/avatar.jpg": "/assets/images/avatar.jpg",
+    "/assets/images/showcase/desktop-dark.svg": "/assets/images/showcase/desktop-dark.svg",
+    "/assets/images/showcase/desktop-light.svg": "/assets/images/showcase/desktop-light.svg",
+    "/assets/images/showcase/mobile-dark-2.svg": "/assets/images/showcase/mobile-dark-2.svg",
+    "/assets/images/showcase/mobile-dark.svg": "/assets/images/showcase/mobile-dark.svg",
+    "/assets/images/showcase/mobile-light-2.svg": "/assets/images/showcase/mobile-light-2.svg",
+    "/assets/images/showcase/mobile-light.svg": "/assets/images/showcase/mobile-light.svg",
+    "/assets/js/vendor/alpinejs.min.js": "/assets/js/vendor/alpinejs.min.js",
+    "/assets/js/vendor/alpinejs-collapse.min.js": "/assets/js/vendor/alpinejs-collapse.min.js",
+    "/assets/js/vendor/gsap.min.js": "/assets/js/vendor/gsap.min.js",
+    "/assets/js/vendor/perfect-scrollbar.min.js": "/assets/js/vendor/perfect-scrollbar.min.js",
+    "/assets/css/vendor/perfect-scrollbar.css": "/assets/css/vendor/perfect-scrollbar.css",
+    "/assets/js/vendor/toasty.min.js": "/assets/js/vendor/toasty.min.js",
+    "/assets/css/vendor/toasty.min.css": "/assets/css/vendor/toasty.min.css"
+}

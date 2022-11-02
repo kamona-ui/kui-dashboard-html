@@ -2,10 +2,7 @@
 const { Command } = require('commander')
 const { version, name } = require('../package.json')
 const buildHtml = require('./html')
-const buildJS = require('./js')
 const serve = require('./serve')
-const vendor = require('./vendor')
-const images = require('./images')
 
 const program = new Command(name)
 
@@ -22,30 +19,6 @@ program
   .option('-s, --skip <skip...>', 'Patterns to skip', ['**/layouts/**', '**/components/**', '**/partials/**'])
   .description('Compile `Edge` files to html')
   .action(buildHtml)
-
-program
-  .command('js')
-  .option('-r, --root <root>', 'Root of `js` files', 'src/assets/js')
-  .option('-i, --input <input...>', 'Entry points', ['*.js'])
-  .option('-o, --output <output>', 'Output dir', 'public/assets/js')
-  .option('-w, --watch', 'Watch files')
-  .option('-s, --skip <skip...>', 'Patterns to skip', [])
-  .option('-x, --external <external...>', 'File or a package as external to exclude it from your build', ['alpinejs'])
-  .description('Build javascript')
-  .action(buildJS)
-
-program
-  .command('vendor')
-  .option('-c, --config', 'Path to config file', 'src/vendor/vendor.json')
-  .description('Copy vendor files from `node_modules` to `public` directory.')
-  .action(vendor)
-
-program
-  .command('images')
-  .option('-s, --src', 'Path to src directory', 'src/assets/images')
-  .option('-d, --dest', 'Path to dest directory', 'public/assets/images')
-  .description('Copy images from `src` to `public` directory.')
-  .action(images)
 
 program
   .command('serve')
