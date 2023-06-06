@@ -1,6 +1,5 @@
 const { resolve, join, basename, relative, dirname } = require('path')
 const { ensureDir, writeFile, pathExists } = require('fs-extra')
-const { Liquid } = require('liquidjs')
 const { Edge } = require('edge.js')
 const fg = require('fast-glob')
 const chokidar = require('chokidar')

@@ -816,11 +816,6 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-egalink-toasty.js@^1.5.5:
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/egalink-toasty.js/-/egalink-toasty.js-1.5.5.tgz#9a44f8729a20ca98104f9b86c47ab0ea55382cc6"
-  integrity sha512-Ds24PRUXvUEPbFoZ4D0hcSIq5/ju37gXCv7oEIN3O6uRqpeEmzuHiZvXiEABlihMQmrFMC6M2aWgOly8fKO+/g==
-
 electron-to-chromium@^1.4.17:
   version "1.4.62"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.62.tgz#f97b643d206813b9154f1700b3c5b5b828ddc9ac"
@@ -1280,11 +1275,6 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.9.tgz#041b05df45755e587a24942279b9d113146e1c96"
   integrity sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==
 
-gsap@^3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.9.1.tgz#d4c7443540497afee9ddc0824fd0180224e33360"
-  integrity sha512-JSGVYoC6da4pIjdF/yxFU6Rz8OojOIDkbooveZlfNg0+JIoFoRruyfWAEi6R/gUeNcuOiTqUIb0gi1nCNrHf8w==
-
 has-ansi@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/has-ansi/-/has-ansi-2.0.0.tgz#34f5049ce1ecdf2b0649af3ef24e45ed35416d91"
@@ -1636,11 +1626,6 @@ lines-and-columns@^1.1.6:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
-
-liquidjs@^9.34.0:
-  version "9.34.0"
-  resolved "https://registry.yarnpkg.com/liquidjs/-/liquidjs-9.34.0.tgz#b1a9cca1267aacce7ece13f8036751ca8f1664ee"
-  integrity sha512-LIOqPT3hvnmJQKwhJwBLcEwaEthdWJH2uvNjC9Q6K/n25+tuXQuvd/bwH1WwWBtBpzvESjcDWdM2SHpRlTLvqg==
 
 load-json-file@^4.0.0:
   version "4.0.0"
