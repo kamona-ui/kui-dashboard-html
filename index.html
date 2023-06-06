@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>K UI - Admin Dashboard Template</title>
+    <link rel="icon" href="favicon.ico" />
+    <title>K UI - Dashboard</title>
 
     <!-- Fonts -->
     <link
@@ -13,86 +14,368 @@
     />
 
     <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/vendor/perfect-scrollbar.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/vendor/toasty.min.css" />
 
-    <!-- Alpinejs -->
+    <!-- Scripts -->
+    <script src="assets/js/vendor/alpinejs-collapse.min.js" defer></script>
     <script src="assets/js/vendor/alpinejs.min.js" defer></script>
-
-    <!-- Loading screen styles -->
-    <style>
-      #loading {
-        position: fixed;
-        perspective: 50vw;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        z-index: 9000000000000;
-        overflow: hidden;
-      }
-      #loading .left {
-        background-color: black;
-        width: 100%;
-        height: 100%;
-      }
-      #loading .right {
-        background-color: black;
-        width: 100%;
-        height: 100%;
-      }
-      #loading .logo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      #loading .logo svg {
-        height: 50vh;
-      }
-    </style>
   </head>
   <body class="font-sans antialiased">
-    <!--  Loading  -->
-    <div id="loading">
-      <div class="left"></div>
-      <div class="right"></div>
-      <div class="logo">
-        <svg viewBox="0 0 40 40" fill="#A855F7" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
-          <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
-          <path
-            d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
-          />
-          <path
-            d="M16.9124 7.7235L20 7.10598L22.47 7.7235L20.9263 9.26727C20.9263 9.26727 20.7204 27.4839 20.9263 28.1014C21.1321 28.7189 21.729 30.0774 22.47 30.5714C23.3963 31.1889 27.9489 31.2883 29.1729 28.8823C29.556 28.1293 29.5872 27.9014 29.7171 26.9514C29.7393 26.7894 29.7643 26.6064 29.7945 26.3962C29.8955 25.6912 29.8895 24.8909 29.8832 24.0704C29.8817 23.8711 29.8802 23.6706 29.8802 23.47V12.3548L28.0277 9.57603V9.26727L38.8341 11.4286V12.3548L37.2903 12.9723V26.8664L38.8341 28.1014L34.2028 29.3725L35.4378 27.4839V12.9723L33.2765 11.4286L31.424 12.9723L31.1152 25.0138C31.1152 25.8618 31.017 27.1791 30.7193 28.3251C30.6106 28.7435 30.1101 29.5467 30.1101 29.5467C30.1101 29.5467 29.6731 30.2533 29.2627 30.5714C28.8853 30.8639 28.1871 31.1541 28.1871 31.1541C28.1871 31.1541 26.0347 32.0258 24.0721 32.4043C23.08 32.5957 22.1571 32.4413 21.5645 32.2043C21.541 32.1912 21.5168 32.1778 21.492 32.1641C20.9896 31.8865 20.243 31.4739 19.6681 30.5714C19.1558 29.767 18.765 28.7318 18.765 27.4839V9.57603L16.9124 7.7235Z"
-          />
-        </svg>
-      </div>
-    </div>
+    <div x-data="globalState" :class="{ dark: isDarkMode }" @resize.window="handleWindowResize">
+      <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-bg dark:text-gray-100">
+        <!-- Sidebar overly -->
+        <div
+          x-show="isSidebarOpen"
+          @click="isSidebarOpen = false"
+          class="fixed inset-0 z-30 bg-black/50 lg:hidden"
+        ></div>
 
-    <div :class="{ dark: isDarkMode }" x-data="globalState">
-      <div class="min-h-screen text-gray-900 bg-white dark:bg-dark-bg dark:text-gray-100">
-        <!--  Navbar  -->
-        <nav
-          class="fixed inset-x-0 bottom-0 z-20 transition-all duration-500 md:top-0 md:bottom-auto"
+        <aside
+          style="transition-property: width, transform; transition-duration: 150ms"
+          class="fixed inset-y-0 z-30 flex flex-col py-4 space-y-6 bg-white shadow-lg dark:bg-dark-eval-1"
           :class="{
-                    'shadow-t-lg md:shadow-lg bg-white dark:bg-gray-700 translate-y-full md:-translate-y-full': scrollingDown,
-                    'shadow-t-lg md:shadow-lg bg-white dark:bg-gray-700': scrollingUp,
-                }"
+    'translate-x-0 w-64':
+        isSidebarOpen || isSidebarHovered,
+    '-translate-x-full w-64 md:w-16 md:translate-x-0':
+        !isSidebarOpen && !isSidebarHovered,
+    }"
+          @mouseenter="handleSidebarHover(true)"
+          @mouseleave="handleSidebarHover(false)"
         >
-          <div class="relative flex items-center justify-between p-4 mx-auto max-w-7xl md:h-24">
-            <!--  Logo  -->
-            <a href="#" class="inline-block p-2 bg-white rounded-md dark:bg-dark-eval-1">
-              <span class="sr-only">Home</span>
-              <svg
-                class="w-10 h-auto md:w-12"
+          <!-- Sidebar header -->
+          <div class="flex items-center justify-between flex-shrink-0 px-3">
+            <!-- Logo -->
+            <a href="dashboard.html" class="inline-flex items-center"
+              ><svg
                 aria-hidden="true"
+                class="w-10 h-auto"
+                viewBox="0 0 40 40"
+                fill="#A855F7"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
+                <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
+                <path
+                  d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
+                />
+                <path
+                  d="M16.9124 7.7235L20 7.10598L22.47 7.7235L20.9263 9.26727C20.9263 9.26727 20.7204 27.4839 20.9263 28.1014C21.1321 28.7189 21.729 30.0774 22.47 30.5714C23.3963 31.1889 27.9489 31.2883 29.1729 28.8823C29.556 28.1293 29.5872 27.9014 29.7171 26.9514C29.7393 26.7894 29.7643 26.6064 29.7945 26.3962C29.8955 25.6912 29.8895 24.8909 29.8832 24.0704C29.8817 23.8711 29.8802 23.6706 29.8802 23.47V12.3548L28.0277 9.57603V9.26727L38.8341 11.4286V12.3548L37.2903 12.9723V26.8664L38.8341 28.1014L34.2028 29.3725L35.4378 27.4839V12.9723L33.2765 11.4286L31.424 12.9723L31.1152 25.0138C31.1152 25.8618 31.017 27.1791 30.7193 28.3251C30.6106 28.7435 30.1101 29.5467 30.1101 29.5467C30.1101 29.5467 29.6731 30.2533 29.2627 30.5714C28.8853 30.8639 28.1871 31.1541 28.1871 31.1541C28.1871 31.1541 26.0347 32.0258 24.0721 32.4043C23.08 32.5957 22.1571 32.4413 21.5645 32.2043C21.541 32.1912 21.5168 32.1778 21.492 32.1641C20.9896 31.8865 20.243 31.4739 19.6681 30.5714C19.1558 29.767 18.765 28.7318 18.765 27.4839V9.57603L16.9124 7.7235Z"
+                />
+              </svg>
+              <span class="sr-only">Dashbaord home</span>
+            </a>
+
+            <!-- Toggle button -->
+
+            <button
+              type="button"
+              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
+              @click="isSidebarOpen = !isSidebarOpen"
+              x-show="isSidebarOpen || isSidebarHovered"
+            >
+              <span class="sr-only">Toggle sidebar</span>
+
+              <span class="sr-only">Toggle sidebar</span>
+              <!-- menu-fold-right icon -->
+              <svg
+                x-show="!isSidebarOpen"
+                aria-hidden="true"
+                class="w-6 h-6 hidden lg:block"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <!-- menu-fold-left icon -->
+              <svg
+                x-show="isSidebarOpen"
+                aria-hidden="true"
+                class="w-6 h-6 hidden lg:block"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <!-- x icon -->
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6 lg:hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Sidebar content -->
+          <nav x-data="perfectScroll" aria-label="main" class="relative flex flex-col flex-1 gap-4 px-3">
+            <!-- Link -->
+            <!-- base classes: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+            <!-- active classes: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+            <!-- inactive classes: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+            <a
+              href="/"
+              class="flex items-center flex-shrink-0 gap-2 p-2 overflow-hidden text-white transition-colors bg-purple-500 rounded-md shadow-lg hover:bg-purple-600"
+            >
+              <!-- Dashboard icon -->
+              <svg
+                aria-hidden="true"
+                class="flex-shrink-0 w-6 h-6"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.5 12.5C5.22386 12.5 5 12.7239 5 13C5 13.2761 5.22386 13.5 5.5 13.5H7C7.27614 13.5 7.5 13.2761 7.5 13C7.5 12.7239 7.27614 12.5 7 12.5H5.5Z"
+                />
+                <path
+                  d="M6.93935 7.93935C7.13462 7.74409 7.4512 7.74409 7.64646 7.93935L8.70712 9.00001C8.90238 9.19528 8.90238 9.51186 8.70712 9.70712C8.51186 9.90238 8.19528 9.90238 8.00001 9.70712L6.93935 8.64646C6.74409 8.4512 6.74409 8.13462 6.93935 7.93935Z"
+                />
+                <path
+                  d="M17 12.5C16.7239 12.5 16.5 12.7239 16.5 13C16.5 13.2761 16.7239 13.5 17 13.5H18.5C18.7761 13.5 19 13.2761 19 13C19 12.7239 18.7761 12.5 18.5 12.5H17Z"
+                />
+                <path
+                  d="M15.4394 10.0606C15.2441 9.86538 15.2441 9.5488 15.4394 9.35354L16.5 8.29288C16.6953 8.09762 17.0119 8.09762 17.2071 8.29288C17.4024 8.48814 17.4024 8.80472 17.2071 8.99999L16.1465 10.0606C15.9512 10.2559 15.6346 10.2559 15.4394 10.0606Z"
+                />
+                <path
+                  d="M12.9661 12.741C12.9882 12.8236 13 12.9104 13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.0896 12 12.1764 12.0118 12.259 12.0339L13 11.2929C13.1953 11.0976 13.5119 11.0976 13.7071 11.2929C13.9024 11.4881 13.9024 11.8047 13.7071 12L12.9661 12.741Z"
+                />
+                <path
+                  d="M12 8.5C11.7239 8.5 11.5 8.27614 11.5 8V6.5C11.5 6.22386 11.7239 6 12 6C12.2761 6 12.5 6.22386 12.5 6.5V8C12.5 8.27614 12.2761 8.5 12 8.5Z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 3C9.34784 3 6.8043 4.05357 4.92893 5.92893C3.05357 7.8043 2 10.3478 2 13C2 14.3132 2.25866 15.6136 2.7612 16.8268C3.26375 18.0401 4.00035 19.1425 4.92893 20.0711C5.11647 20.2586 5.37082 20.364 5.63604 20.364H18.364C18.6292 20.364 18.8835 20.2586 19.0711 20.0711C19.9997 19.1425 20.7362 18.0401 21.2388 16.8268C21.7413 15.6136 22 14.3132 22 13C22 10.3478 20.9464 7.8043 19.0711 5.92893C17.1957 4.05357 14.6522 3 12 3ZM6.34315 7.34315C7.84344 5.84285 9.87827 5 12 5C14.1217 5 16.1566 5.84285 17.6569 7.34315C19.1571 8.84344 20 10.8783 20 13C20 14.0506 19.7931 15.0909 19.391 16.0615C19.0406 16.9075 18.5479 17.6861 17.9353 18.364H6.06469C5.45205 17.6861 4.95938 16.9075 4.60896 16.0615C4.20693 15.0909 4 14.0506 4 13C4 10.8783 4.84285 8.84344 6.34315 7.34315Z"
+                />
+              </svg>
+
+              <!-- Link title -->
+              <span class="text-base font-medium" x-show="isSidebarOpen || isSidebarHovered"> Dashboard </span>
+            </a>
+          </nav>
+          <!-- Sidebar footer -->
+          <div class="flex-shrink-0 px-3 lg:hidden">
+            <button
+              type="button"
+              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
+              @click="isSidebarOpen = !isSidebarOpen"
+              x-show="!isSidebarOpen"
+            >
+              <span class="sr-only">Toggle sidebar</span>
+
+              <!-- menu-fold-right icon -->
+              <svg
+                x-show="!isSidebarOpen"
+                aria-hidden="true"
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <!-- menu-fold-left icon -->
+              <svg
+                x-show="isSidebarOpen"
+                aria-hidden="true"
+                class="w-6 h-6"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </aside>
+        <!--  -->
+        <div
+          style="transition-property: margin; transition-duration: 150ms"
+          class="flex flex-col min-h-screen"
+          :class="{
+              'lg:ml-64': isSidebarOpen,
+              'md:ml-16': !isSidebarOpen,
+            }"
+        >
+          <!-- Navbar -->
+          <nav
+            aria-label="secondary"
+            class="sticky top-0 z-10 flex items-center justify-between px-6 py-4 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
+            :class="{
+    '-translate-y-full': scrollingDown,
+    'translate-y-0': scrollingUp,
+  }"
+          >
+            <div class="flex items-center gap-2">
+              <!-- Dark mode button -->
+
+              <button
+                type="button"
+                class="md:hidden inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
+                @click="toggleDarkMode"
+              >
+                <span class="sr-only">Toggle dark mode</span>
+
+                <!-- Moon icon -->
+                <svg
+                  x-show="!isDarkMode"
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  ></path>
+                </svg>
+                <!-- Sun icon -->
+                <svg
+                  x-show="isDarkMode"
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <!-- Dark mode button -->
+
+              <button
+                type="button"
+                class="hidden md:inline-flex inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
+                @click="toggleDarkMode"
+              >
+                <span class="sr-only">Toggle dark mode</span>
+
+                <!-- Moon icon -->
+                <svg
+                  x-show="!isDarkMode"
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  ></path>
+                </svg>
+                <!-- Sun icon -->
+                <svg
+                  x-show="isDarkMode"
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  ></path>
+                </svg>
+              </button>
+
+              <!-- User dropdown menu -->
+              <div class="relative">
+                <button
+                  class="flex text-sm transition border-2 border-transparent rounded-md focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1"
+                >
+                  <img class="object-cover w-8 h-8 rounded-md" src="assets/images/avatar.jpg" alt="User Name" />
+                </button>
+              </div>
+            </div>
+          </nav>
+          <!-- Mobile nav -->
+          <div
+            class="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between px-4 py-4 transition-transform duration-500 bg-white sm:px-6 md:hidden dark:bg-dark-eval-1"
+            :class="{
+        'translate-y-full': scrollingDown,
+        'translate-y-0': scrollingUp,
+    }"
+          >
+            <!-- Search button -->
+
+            <button
+              type="button"
+              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
+            >
+              <span class="sr-only">Searrch</span>
+
+              <!-- Search icon -->
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </button>
+
+            <!-- Logo -->
+            <a href="#">
+              <span class="sr-only">K UI dashboard</span
+              ><svg
+                aria-hidden="true"
+                class="w-10 h-auto"
                 viewBox="0 0 40 40"
                 fill="#A855F7"
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,18 +391,17 @@
               </svg>
             </a>
 
-            <!--  Toggle dark mode button  -->
+            <!-- Sidebar button -->
 
             <button
               type="button"
               class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-              @click="toggleDarkMode()"
+              @click="isSidebarOpen = true"
             >
-              <span class="sr-only">toggle dark mode</span>
+              <span class="sr-only">Toggle sidebar</span>
 
-              <!-- Moon icon -->
+              <!-- Menu icon -->
               <svg
-                x-show="!isDarkMode"
                 class="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
@@ -130,191 +412,83 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                ></path>
-              </svg>
-
-              <!-- Sun icon -->
-              <svg
-                x-show="isDarkMode"
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  d="M4 6h16M4 12h16M4 18h16"
                 ></path>
               </svg>
             </button>
           </div>
-        </nav>
 
-        <main>
-          <h1 class="sr-only">K UI Admin Dashboard Template</h1>
+          <!-- Page header-->
+          <header class="p-4 sm:p-6">
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <h2 class="text-xl font-semibold leading-tight">Dashboard</h2>
 
-          <section
-            class="relative min-h-screen overflow-hidden bg-gradient-to-tr from-purple-500 via-blue-300 to-indigo-400 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-800"
-          >
-            <h2 class="sr-only">Showcase</h2>
-            <!--  Background  -->
-            <div
-              class="absolute inset-x-[-10vw] top-0 bottom-20 md:bottom-0 md:top-24 rounded-[77vw/50vw] rounded-t-none md:rounded-b-none md:rounded-[77vw/50vw] bg-white dark:bg-dark-bg"
-            ></div>
-
-            <div class="px-6 pb-24 mx-auto md:pt-28 max-w-7xl">
-              <div class="grid gap-5 perspective-100vw md:grid-cols-4 md:grid-rows-1">
-                <div class="items-center justify-center hidden md:flex transform-style-3d">
-                  <div
-                    id="mobile2Showcase"
-                    class="flex items-center justify-center w-full h-full rotate-x-25 rotate-y-25 rotate-z--15"
-                  >
-                    <img
-                      x-show="!isDarkMode"
-                      src="assets/images/showcase/mobile-light-2.svg"
-                      class="h-auto w-[70%] drop-shadow-2xl"
-                    />
-                    <img
-                      x-show="isDarkMode"
-                      src="assets/images/showcase/mobile-dark-2.svg"
-                      class="h-auto w-[70%] drop-shadow-2xl"
-                    />
-                  </div>
-                </div>
-
-                <div
-                  class="flex flex-col items-center justify-center col-span-3 row-start-2 gap-10 transform-style-3d md:pb-18 md:row-start-1 md:col-span-2 md:col-start-2"
+              <a
+                href="https://github.com/kamona-ui/kui-dashboard-html"
+                aria-disabled="false"
+                class="gap-2 justify-center inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-black text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-black dark:hover:bg-dark-eval-3 px-4 py-2 text-base rounded-md"
+                target="_blank"
+              >
+                <!-- Github icon -->
+                <svg
+                  class="w-6 h-6"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <div class="flex items-center justify-center mt-10 md:mt-4 transform-style-3d">
-                    <img
-                      x-show="!isDarkMode"
-                      id="desktopShowcase"
-                      class="rotate-x-15 w-[75%] md:w-full"
-                      src="assets/images/showcase/desktop-light.svg"
-                      alt="Desktop showcase"
-                    />
-                    <img
-                      x-show="isDarkMode"
-                      id="desktopShowcase"
-                      class="rotate-x-15 w-[75%] md:w-full"
-                      src="assets/images/showcase/desktop-dark.svg"
-                      alt="Desktop showcase"
-                    />
-                  </div>
-
-                  <!-- CTA Buttons  -->
-                  <div class="flex flex-col items-center justify-center gap-6 lg:flex-row">
-                    <!-- Live preview button -->
-
-                    <a
-                      href="dashboard.html"
-                      aria-disabled="false"
-                      class="gap-2 inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-purple-500 text-white hover:bg-purple-600 focus:ring-purple-500 px-4 py-2 text-base rounded-md"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        ></path>
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                        ></path>
-                      </svg>
-                      <span class="whitespace-nowrap">Live Preview</span>
-                    </a>
-
-                    <!-- Github link -->
-
-                    <a
-                      href="https://github.com/kamona-ui/kui-dashboard-html"
-                      aria-disabled="false"
-                      class="gap-2 inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-black text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-black dark:hover:bg-dark-eval-3 px-4 py-2 text-base rounded-md"
-                      target="_blank"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="w-6 h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"
-                        ></path>
-                      </svg>
-                      <span class="whitespace-nowrap">Github</span>
-                    </a>
-
-                    <!-- Figma file link -->
-
-                    <a
-                      href="https://www.figma.com/community/file/1019844542917981418/"
-                      aria-disabled="false"
-                      class="gap-2 inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-cyan-500 text-white hover:bg-cyan-600 focus:ring-cyan-500 px-4 py-2 text-base rounded-md"
-                      target="_blank"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="w-6 h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M15.332 8.668a3.333 3.333 0 0 0 0-6.663H8.668a3.333 3.333 0 0 0 0 6.663 3.333 3.333 0 0 0 0 6.665 3.333 3.333 0 0 0 0 6.664A3.334 3.334 0 0 0 12 18.664V8.668h3.332z"
-                        ></path>
-                        <circle cx="15.332" cy="12" r="3.332"></circle>
-                      </svg>
-                      <span class="whitespace-nowrap">Figma File</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="items-center justify-center hidden md:flex transform-style-3d">
-                  <div
-                    id="mobile1Showcase"
-                    class="flex items-center justify-center w-full h-full rotate-x-25 rotate-y--25 rotate-z-15"
-                  >
-                    <img
-                      x-show="!isDarkMode"
-                      src="assets/images/showcase/mobile-light.svg"
-                      class="h-auto w-[70%] drop-shadow-2xl"
-                    />
-                    <img
-                      x-show="isDarkMode"
-                      src="assets/images/showcase/mobile-dark.svg"
-                      class="h-auto w-[70%] drop-shadow-2xl"
-                    />
-                  </div>
-                </div>
-              </div>
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.026 2C6.517 2 2.052 6.465 2.052 11.974C2.052 16.38 4.909 20.119 8.873 21.439C9.372 21.529 9.552 21.222 9.552 20.958C9.552 20.721 9.544 20.093 9.541 19.262C6.766 19.864 6.18 17.924 6.18 17.924C5.728 16.772 5.073 16.465 5.073 16.465C4.168 15.846 5.142 15.86 5.142 15.86C6.144 15.93 6.669 16.888 6.669 16.888C7.559 18.412 9.005 17.972 9.571 17.717C9.662 17.072 9.922 16.632 10.206 16.383C7.992 16.132 5.664 15.276 5.664 11.453C5.664 10.366 6.053 9.474 6.688 8.778C6.587 8.525 6.242 7.51 6.787 6.138C6.787 6.138 7.624 5.869 9.529 7.159C10.3426 6.93767 11.1818 6.8247 12.025 6.823C12.8682 6.82437 13.7075 6.93735 14.521 7.159C16.427 5.868 17.263 6.138 17.263 6.138C17.808 7.51 17.466 8.525 17.362 8.778C18.002 9.474 18.386 10.365 18.386 11.453C18.386 15.286 16.056 16.128 13.834 16.375C14.189 16.683 14.509 17.291 14.509 18.221C14.509 19.555 14.497 20.631 14.497 20.958C14.497 21.225 14.675 21.535 15.184 21.437C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2Z"
+                  />
+                </svg>
+                <span>Star on Github</span>
+              </a>
             </div>
-          </section>
-        </main>
+          </header>
+
+          <!-- Content -->
+          <main class="grid flex-1 gap-6 px-4 mt-4 sm:px-6">
+            <h1 class="sr-only">Dashboard Home</h1>
+            <section>
+              <h2 class="text-2xl text-red-400 animate-pulse">Still in design phase, Will be available soon.</h2>
+            </section>
+          </main>
+
+          <!-- Footer -->
+          <footer class="w-full flex flex-col flex-shrink-0 gap-2 px-6 py-4 lg:flex-row lg:justify-between" x-data>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+              &#169; <span x-text="new Date().getFullYear()"></span> K UI, All rights reserved
+            </p>
+
+            <p class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+              <span>Hand-crafted & Made with</span>
+              <span>
+                <svg
+                  class="w-6 h-6 text-red-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </span>
+              <span>by</span>
+              <a href="https://github.com/Kamona-WD" target="_blank" class="text-blue-600 hover:underline">
+                Ahmed Kamel
+              </a>
+            </p>
+          </footer>
+        </div>
       </div>
     </div>
 
-    <script src="assets/js/vendor/toasty.min.js"></script>
-    <script src="assets/js/vendor/gsap.min.js"></script>
+    <script src="assets/js/vendor/perfect-scrollbar.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/landing-page.js"></script>
   </body>
 </html>
