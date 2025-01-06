@@ -1,0 +1,130 @@
+{{#*inline "styles"}}{{/inline}}
+
+{{#> layouts/auth pageTitle='Register'}}
+
+<h1 class="sr-only">Register</h1>
+
+<div class="w-full overflow-hidden bg-white px-6 py-4 shadow-md dark:bg-dark-eval-1 sm:rounded-lg">
+    <form action="#">
+        <div class="grid gap-6">
+            <div class="grid w-full gap-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"> Name </label>
+
+                <div class="relative text-gray-500 focus-within:text-gray-900 dark:focus-within:text-gray-400">
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 flex items-center px-4">
+                        <span class="iconify h-5 w-5 tabler--user"></span>
+                    </div>
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        class="w-full rounded-md border-gray-400 py-2 pl-10 pr-4 text-base focus:border-primary focus:ring focus:ring-primary focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 rtl:pl-4 rtl:pr-10"
+                        required
+                        autofocus
+                        autocomplete="name"
+                    />
+                </div>
+            </div>
+
+            <div class="grid w-full gap-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"> Email </label>
+
+                <div class="relative text-gray-500 focus-within:text-gray-900 dark:focus-within:text-gray-400">
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 flex items-center px-4">
+                        <span class="iconify h-5 w-5 tabler--mail"></span>
+                    </div>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        class="w-full rounded-md border-gray-400 py-2 pl-10 pr-4 text-base focus:border-primary focus:ring focus:ring-primary focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 rtl:pl-4 rtl:pr-10"
+                        required
+                        autocomplete="username"
+                    />
+                </div>
+                <!---->
+            </div>
+
+            <div class="grid w-full gap-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"> Password </label>
+
+                <div class="relative text-gray-500 focus-within:text-gray-900 dark:focus-within:text-gray-400">
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 flex items-center px-4">
+                        <span class="iconify h-5 w-5 tabler--lock"></span>
+                    </div>
+
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        class="w-full rounded-md border-gray-400 py-2 pl-10 pr-4 text-base focus:border-primary focus:ring focus:ring-primary focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 rtl:pl-4 rtl:pr-10"
+                        required
+                        autocomplete="new-password"
+                    />
+                </div>
+            </div>
+
+            <div class="grid w-full gap-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"> Confirm Password </label>
+
+                <div class="relative text-gray-500 focus-within:text-gray-900 dark:focus-within:text-gray-400">
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 flex items-center px-4">
+                        <span class="iconify h-5 w-5 tabler--lock"></span>
+                    </div>
+
+                    <input
+                        id="password_confirmation"
+                        type="password"
+                        name="password_confirmation"
+                        placeholder="Confirm Password"
+                        class="w-full rounded-md border-gray-400 py-2 pl-10 pr-4 text-base focus:border-primary focus:ring focus:ring-primary focus:ring-offset-2 focus:ring-offset-white dark:border-gray-600 dark:bg-dark-eval-1 dark:text-gray-300 dark:focus:ring-offset-dark-eval-1 rtl:pl-4 rtl:pr-10"
+                        required
+                        autocomplete="new-password"
+                    />
+                </div>
+            </div>
+
+            <label class="inline-flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <input
+                    name="terms"
+                    id="terms"
+                    type="checkbox"
+                    class="focus:border-primary-300 scale-125 transform rounded border-gray-400 text-primary focus:ring focus:ring-primary dark:border-gray-600 dark:bg-dark-eval-1 dark:focus:ring-offset-dark-eval-1"
+                />
+                <div>
+                    I agree to the
+                    <a target="_blank" href="#" class="text-sm text-blue-600 underline hover:text-blue-900">
+                        Terms of Service
+                    </a>
+                    and
+                    <a target="_blank" href="#" class="text-sm text-blue-600 underline hover:text-blue-900">
+                        Privacy Policy
+                    </a>
+                </div>
+            </label>
+
+            <button
+                type="submit"
+                class="inline-flex min-w-max select-none items-center justify-center gap-2 rounded-md bg-primary p-2 font-medium text-white transition duration-300 ease-in-out hover:bg-primary-dark focus:z-10 focus:outline-none focus:ring focus:ring-primary focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-dark-eval-2"
+            >
+                <span class="iconify h-6 w-6 tabler--user-plus"></span>
+
+                <span>Register</span>
+            </button>
+
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+                Already have an account?
+                <a href="/auth/login.html" class="text-blue-500 hover:underline">Login</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+{{/layouts/auth}}
+
+{{#*inline "beforeScript"}}{{/inline}} {{#*inline "beforeAlpineStart"}}{{/inline}} {{#*inline "afterScript"}}{{/inline}}

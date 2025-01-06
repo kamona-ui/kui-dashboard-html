@@ -21,7 +21,7 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
-    "format": "prettier --write src",
+    "format": "prettier --write \"src\" \"dist/**/*.html\"",
     "deploy": "gh-pages -d dist",
     "p": "prettier --write"
   },
@@ -33,6 +33,7 @@
     "alpinejs": "^3.14.8",
     "autoprefixer": "^10.4.20",
     "gh-pages": "^6.3.0",
+    "perfect-scrollbar": "^1.5.6",
     "postcss": "^8.4.49",
     "postcss-import": "^16.1.0",
     "prettier": "^3.4.2",

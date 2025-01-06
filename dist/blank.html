@@ -9,7 +9,7 @@
         <meta name="keywords" content="Admin, Dashboard, Template, HTML, CSS, JavaScript, Tailwindcss, Alpinejs" />
         <meta name="author" content="Kamona UI" />
 
-        <title>K UI Dashboard Template</title>
+        <title>K UI Dashboard Template | Blank</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -138,7 +138,7 @@
                         <!-- inactive classes: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
                         <a
                             href="/"
-                            class="flex flex-shrink-0 items-center gap-2 overflow-hidden rounded-md bg-primary p-2 text-white shadow-lg transition-colors hover:bg-primary-dark"
+                            class="flex flex-shrink-0 items-center gap-2 overflow-hidden rounded-md p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-dark-eval-2 dark:hover:text-gray-300"
                         >
                             <!-- Icon -->
                             <span class="iconify h-6 w-6 flex-shrink-0 tabler--dashboard"></span>
@@ -151,10 +151,10 @@
                         <!-- Base: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
                         <!-- Active: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
                         <!-- Inactive: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
-                        <div class="relative" x-data="{ open:  false  }">
+                        <div class="relative" x-data="{ open:  true  }">
                             <button
                                 type="button"
-                                class="flex w-full flex-shrink-0 items-center gap-2 overflow-hidden rounded-md p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-dark-eval-2 dark:hover:text-gray-300"
+                                class="flex w-full flex-shrink-0 items-center gap-2 overflow-hidden rounded-md bg-purple-500 p-2 text-white shadow-lg transition-colors hover:bg-purple-600"
                                 @click="open = !open"
                             >
                                 <span class="iconify h-6 w-6 flex-shrink-0 tabler--file" aria-hidden="true"></span>
@@ -196,7 +196,7 @@
                                     >
                                         <a
                                             href="/blank.html"
-                                            class="text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                                            class="text-gray-900 transition-colors hover:text-gray-900 dark:text-gray-200 dark:hover:text-gray-100"
                                         >
                                             Blank
                                         </a>
@@ -535,13 +535,25 @@
                             <!-- Breadcrumb -->
                             <nav class="flex" aria-label="Breadcrumb">
                                 <ol class="inline-flex items-center gap-x-1 md:gap-x-2">
-                                    <li class="inline-flex items-center gap-2" aria-current="page">
-                                        <span
-                                            class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400"
+                                    <li class="inline-flex items-center gap-2">
+                                        <a
+                                            href="/"
+                                            class="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
                                         >
                                             <span class="iconify h-4 w-4 tabler--home-filled"></span>
 
                                             <span>Dashboard</span>
+                                        </a>
+
+                                        <span
+                                            class="iconify h-5 w-5 text-gray-400 tabler--chevron-right rtl:rotate-180"
+                                        ></span>
+                                    </li>
+                                    <li class="inline-flex items-center gap-2" aria-current="page">
+                                        <span
+                                            class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400"
+                                        >
+                                            <span>Blank</span>
                                         </span>
                                     </li>
                                 </ol>
@@ -550,7 +562,7 @@
                             <!-- Page header-->
                             <header>
                                 <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                                    <h2 class="text-xl font-semibold leading-tight">Dashboard</h2>
+                                    <h2 class="text-xl font-semibold leading-tight">Blank</h2>
 
                                     <a
                                         href="https://github.com/kamona-ui/kui-dashboard-html"
@@ -568,7 +580,7 @@
 
                         <!-- Content -->
                         <main class="w-full flex-1">
-                            <h1 class="sr-only">Home page</h1>
+                            <div></div>
                         </main>
 
                         <!-- Footer -->
