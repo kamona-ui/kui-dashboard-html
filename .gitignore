@@ -4,4 +4,4 @@ dist-ssr
 *.local
 *.log
 /.out
-
+/notes

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <meta name="description" content="Admin dashboard template built with tailwindcss and alpinejs." />
+        <meta name="keywords" content="Admin, Dashboard, Template, HTML, CSS, JavaScript, Tailwindcss, Alpinejs" />
+        <meta name="author" content="Kamona UI" />
+
+        <title>{{ title }} {{#if pageTitle}} | {{ pageTitle }} {{/if}}</title>
+
+        <link rel="stylesheet" href="{{ resolve-from-root '../css/main.css' }}" />
+    </head>
+
+    <body class="font-sans antialiased">
+        {{> partials/navbar }}
+
+        <main>
+            {{> @partial-block}}
+        </main>
+
+        <script type="module" src="{{ resolve-from-root '../js/main.js' }}"></script>
+    </body>
+</html>
