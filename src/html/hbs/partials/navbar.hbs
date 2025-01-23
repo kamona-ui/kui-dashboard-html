@@ -10,17 +10,14 @@
     <div class="flex items-center gap-2">
         <!-- Quick actions menu -->
         <div x-dropdown>
-            <button
-                x-dropdown:trigger
-                type="button"
-                class="inline-flex select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
-            >
-                <span class="sr-only">Quick actions</span>
+            {{#btn
+                variant="transparent"
+                srText="Quick actions"
+                icon="tabler--sparkles"
+                attrs="x-dropdown:trigger"
+            }}{{/btn}}
 
-                <span class="iconify h-6 w-6 tabler--sparkles"></span>
-            </button>
-
-            <div x-dropdown:menu="{ align: 'left' }" class="z-50 mt-2 w-48 rounded-md shadow-lg">
+            <div x-dropdown:menu.bottom-start class="z-50 w-48 rounded-md shadow-lg">
                 <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
                     <a
                         href="#"
@@ -58,64 +55,57 @@
         </div>
 
         <!-- Search button -->
-        <button
-            type="button"
-            class="hidden select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2 md:inline-flex"
-        >
-            <span class="sr-only">Search</span>
-
-            <span class="iconify h-6 w-6 tabler--search"></span>
-        </button>
+        {{#btn
+            variant="transparent"
+            srText="Search"
+            icon="tabler--search"
+            className="hidden md:inline-flex"
+        }}{{/btn}}
     </div>
 
     <div class="flex items-center gap-2">
         <!-- Settings button -->
-        <button
-            type="button"
-            class="inline-flex select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
-        >
-            <span class="sr-only">Settings</span>
-
-            <span class="iconify h-6 w-6 tabler--settings"></span>
-        </button>
+        {{#btn
+            variant="transparent"
+            srText="Settings"
+            icon="tabler--settings"
+        }}{{/btn}}
 
         <!-- Notifications button -->
-        <button
-            type="button"
-            class="inline-flex select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
-        >
-            <span class="sr-only">Notifications</span>
-
-            <span class="iconify h-6 w-6 tabler--bell"></span>
-        </button>
+        {{#btn
+            variant="transparent"
+            srText="Notifications"
+            icon="tabler--bell"
+        }}{{/btn}}
 
         <!-- Dark mode button -->
-        <button
-            type="button"
-            class="inline-flex select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
-            @click="$store.darkMode.toggle()"
-        >
-            <span class="sr-only">Toggle dark mode</span>
-
+        {{#btn
+            variant="transparent"
+            srText="Toggle dark mode"
+            className="p-2"
+            attrs='@click="$store.darkMode.toggle()"'
+        }}
             <!-- Moon icon -->
             <span x-show="!$store.darkMode.value" class="iconify h-6 w-6 tabler--moon"></span>
 
             <!-- Sun icon -->
             <span x-show="$store.darkMode.value" class="iconify h-6 w-6 tabler--sun"></span>
-        </button>
+        {{/btn}}
 
         <!-- User dropdown menu -->
         <div x-dropdown>
-            <button
-                x-dropdown:trigger
-                class="inline-flex overflow-hidden rounded-md border-2 border-transparent transition focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1"
-            >
+            {{#btn
+                variant="transparent"
+                srText="User menu"
+                className="p-0 overflow-hidden"
+                attrs="x-dropdown:trigger"
+            }}
                 <img
                     class="h-10 w-10 rounded-md object-cover"
                     src="/images/avatar.jpeg"
                     alt="User Name"
                 />
-            </button>
+            {{/btn}}
 
             <div 
                 x-dropdown:menu.bottom-end 
@@ -150,15 +140,11 @@
     }"
 >
     <!-- Search button -->
-    <button
-        type="button"
-        class="inline-flex select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
-    >
-        <span class="sr-only">Search</span>
-
-        <!-- Search icon -->
-        <span class="iconify h-6 w-6 tabler--search"></span>
-    </button>
+    {{#btn
+        variant="transparent"
+        srText="Search"
+        icon="tabler--search"
+    }}{{/btn}}
 
     <!-- Logo -->
     <a href="{{ baseUrl '/' }}">
@@ -168,14 +154,10 @@
     </a>
 
     <!-- Sidebar button -->
-    <button
-        type="button"
-        class="inline-flex select-none items-center rounded-md bg-white p-2 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
-        @click="isSidebarOpen = true"
-    >
-        <span class="sr-only">Toggle sidebar</span>
-
-        <!-- Menu icon -->
-        <span class="iconify h-6 w-6 tabler--menu"></span>
-    </button>
+    {{#btn
+        variant="transparent"
+        srText="Toggle sidebar"
+        icon="tabler--menu"
+        attrs='@click="isSidebarOpen = true"'
+    }}{{/btn}}
 </div>
