@@ -51,8 +51,7 @@ function handleMenu(Alpine, el, modifiers) {
     ]
     let placement = positions.find((i) => modifiers.includes(i))
 
-    let defaultClasses = ''
-    let transitionClasses = {
+    const transitionClasses = {
         'x-transition:enter': 'transition ease-out duration-200',
         'x-transition:enter-start': 'transform opacity-0 scale-95',
         'x-transition:enter-end': 'transform opacity-100 scale-100',
@@ -62,7 +61,6 @@ function handleMenu(Alpine, el, modifiers) {
     }
 
     Alpine.bind(el, {
-        class: `${defaultClasses}`,
         style: { display: 'none' },
         ':id'() {
             return this.$id('dropdown-menu')
