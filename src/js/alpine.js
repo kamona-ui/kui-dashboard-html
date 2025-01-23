@@ -1,7 +1,8 @@
 import Alpine from 'alpinejs'
 import AlpineCollapse from '@alpinejs/collapse'
+import AlpineAnchor from '@alpinejs/anchor'
 import PerfectScrollbar from 'perfect-scrollbar'
-import { dropdown } from './plugins'
+import kuiPlugin from './plugins'
 
 Alpine.store('darkMode', {
     value: false,
@@ -52,23 +53,6 @@ Alpine.data('globalState', () => {
 
         isSidebarHovered: false,
 
-        handleSidebarHover(value) {
-            if (window.innerWidth < 1024 || this.isSidebarOpen) {
-                return
-            }
-            this.isSidebarHovered = value
-        },
-
-        handleWindowResize() {
-            // if (!this.isSidebarOpen) return
-
-            if (window.innerWidth <= 1024) {
-                this.isSidebarOpen = false
-            } else {
-                this.isSidebarOpen = true
-            }
-        },
-
         scrollingDown: false,
 
         scrollingUp: false,
@@ -97,6 +81,7 @@ Alpine.data('perfectScroll', () => {
 })
 
 Alpine.plugin(AlpineCollapse)
-Alpine.plugin(dropdown)
+Alpine.plugin(AlpineAnchor)
+Alpine.plugin(kuiPlugin)
 
 export default Alpine

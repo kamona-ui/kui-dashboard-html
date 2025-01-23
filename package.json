@@ -26,6 +26,7 @@
     "p": "prettier --write"
   },
   "devDependencies": {
+    "@alpinejs/anchor": "^3.14.8",
     "@alpinejs/collapse": "^3.14.8",
     "@iconify-json/tabler": "^1.2.13",
     "@iconify/tailwind": "^1.2.0",
