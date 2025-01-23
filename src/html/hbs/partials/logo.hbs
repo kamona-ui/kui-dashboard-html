@@ -1,8 +1,8 @@
 <svg
     aria-hidden="true"
-    class="{{#unless className}} h-auto w-10 {{/unless}}"
+    class="{{#unless className}} h-auto w-10 {{else}} {{className}} {{/unless}}"
     viewBox="0 0 40 40"
-    fill="{{#unless color}} #A855F7 {{/unless}}"
+    fill="{{#unless color}} #A855F7 {{else}} {{color}} {{/unless}}"
     xmlns="http://www.w3.org/2000/svg"
 >
     <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />

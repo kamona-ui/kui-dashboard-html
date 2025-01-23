@@ -11,7 +11,7 @@ export default [
         links: [
             {
                 title: 'Blank',
-                url: '/blank.html',
+                url: 'blank.html',
             },
         ],
     },
@@ -22,11 +22,11 @@ export default [
         links: [
             {
                 title: 'Login',
-                url: '/auth/login.html',
+                url: 'auth/login.html',
             },
             {
                 title: 'Register',
-                url: '/auth/register.html',
+                url: 'auth/register.html',
             },
         ],
     },

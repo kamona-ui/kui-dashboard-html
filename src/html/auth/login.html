@@ -63,7 +63,10 @@
                     <span class="text-sm">Remember me</span>
                 </label>
 
-                <a href="/auth/forgot-password.html" class="text-sm text-blue-500 hover:underline">
+                <a 
+                    href="#" 
+                    class="text-sm text-blue-500 hover:underline"
+                >
                     Forgot your password?
                 </a>
             </div>
@@ -79,7 +82,7 @@
 
             <p class="text-sm text-gray-600 dark:text-gray-400">
                 Don't have an account?
-                <a href="/auth/register.html" class="text-blue-500 hover:underline">Register</a>
+                <a href="{{ baseUrl 'auth/register.html' }}" class="text-blue-500 hover:underline">Register</a>
             </p>
         </div>
     </form>
