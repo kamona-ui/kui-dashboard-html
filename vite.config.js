@@ -31,6 +31,7 @@ export default defineConfig({
         })
     ],
     root: 'src/html',
+    publicDir: resolve(__dirname, 'public'),
     resolve: {
         alias: {
             '@/': resolve(__dirname, 'src'),
