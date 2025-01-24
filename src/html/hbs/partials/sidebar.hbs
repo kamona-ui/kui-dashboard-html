@@ -1,7 +1,8 @@
 <!-- Sidebar overly -->
 <div
-    x-show="isSidebarOpen"
-    @click="isSidebarOpen = false"
+    style="display: none;"
+    x-show="$store.sidebar.isOpen"
+    @click="$store.sidebar.close()"
     class="fixed inset-0 z-40 bg-black/50 duration-700 md:hidden"
     x-transition:enter="transition duration-200 ease-in-out"
     x-transition:enter-start="opacity-0"
@@ -13,10 +14,11 @@
 
 <!-- Sidebar -->
 <aside
-    class="fixed inset-y-0 z-40 flex h-screen flex-col gap-6 bg-white py-4 shadow-lg transition-all duration-150 dark:bg-dark-eval-1 md:sticky md:top-0 md:transition-[width]"
+    x-sidebar
+    class="fixed inset-y-0 z-40 flex flex-col space-y-6 w-64 -translate-x-full lg:translate-x-0 bg-white py-4 shadow-lg transition-all duration-200 dark:bg-dark-eval-1 md:transition-[width]"
     :class="{
-        'translate-x-0 w-64': isSidebarOpen || isSidebarHovered,
-        '-translate-x-full w-64 md:w-16 md:translate-x-0': !isSidebarOpen && !isSidebarHovered,
+        'translate-x-0 w-64': isOpen || isHovered,
+        '-translate-x-full w-64 md:w-16 md:translate-x-0': !isOpen && !isHovered,
     }"
 >
     <!-- Sidebar header -->
@@ -33,11 +35,11 @@
             variant="transparent"
             className="p-2"
             srText="Toggle sidebar"
-            attrs='@click="isSidebarOpen = !isSidebarOpen" x-show="isSidebarOpen"'
+            attrs='@click="toggle()" x-show="isOpen || isHovered"'
         }}
         <!-- menu-fold-right icon -->
         <svg
-            x-show="!isSidebarOpen"
+            x-show="!isOpen"
             aria-hidden="true"
             class="hidden h-6 w-6 lg:block"
             viewBox="0 0 24 24"
@@ -55,7 +57,7 @@
 
         <!-- menu-fold-left icon -->
         <svg
-            x-show="isSidebarOpen"
+            x-show="isOpen"
             aria-hidden="true"
             class="hidden h-6 w-6 lg:block"
             viewBox="0 0 24 24"
@@ -92,7 +94,7 @@
             <span class="iconify {{ iconName }} flex-shrink-0 w-6 h-6"></span>
 
             <!-- Link title -->
-            <span class="text-base font-medium" x-show="isSidebarOpen">
+            <span class="text-base font-medium" x-show="isOpen || isHovered">
                 {{ title }}
             </span>
         </a>
@@ -108,12 +110,12 @@
             >
                 <span class="iconify {{ iconName }} flex-shrink-0 w-6 h-6" aria-hidden="true"></span>
 
-                <span class="whitespace-nowrap text-base font-medium" x-show="isSidebarOpen || isSidebarHovered">
+                <span class="whitespace-nowrap text-base font-medium" x-show="isOpen || isHovered">
                     {{ title }}
                 </span>
 
                 <span
-                    x-show="isSidebarOpen || isSidebarHovered"
+                    x-show="isOpen || isHovered"
                     aria-hidden="true"
                     class="relative ms-auto block h-6 w-6"
                 >
@@ -133,7 +135,7 @@
             <!-- Base: transition-colors hover:text-gray-900 dark:hover:text-gray-100 -->
             <!-- Active: text-gray-900 dark:text-gray-200 -->
             <!-- Inactive: text-gray-500 dark:text-gray-400 -->
-            <div x-show="open && (isSidebarOpen || isSidebarHovered)" x-collapse>
+            <div x-show="open && (isOpen || isHovered)" x-collapse>
                 <ul
                     class="relative ml-5 px-0 pb-0 pt-2 before:absolute before:inset-y-0 before:left-0 before:block before:w-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
                 >
@@ -157,16 +159,16 @@
     </nav>
 
     <!-- Sidebar footer -->
-    <div class="flex-shrink-0 px-3">
+    <div class="flex-shrink-0 px-3 lg:hidden">
         {{#btn
             variant="transparent"
             className="p-2"
             srText="Toggle sidebar"
-            attrs='@click="isSidebarOpen = !isSidebarOpen" x-show="!isSidebarOpen"'
+            attrs='@click="toggle()" x-show="!isOpen"'
         }}
         <!-- menu-fold-right icon -->
         <svg
-            x-show="!isSidebarOpen"
+            x-show="!isOpen"
             aria-hidden="true"
             class="h-6 w-6"
             viewBox="0 0 24 24"
@@ -184,7 +186,7 @@
 
         <!-- menu-fold-left icon -->
         <svg
-            x-show="isSidebarOpen"
+            x-show="isOpen"
             aria-hidden="true"
             class="h-6 w-6"
             viewBox="0 0 24 24"

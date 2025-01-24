@@ -50,10 +50,6 @@ Alpine.data('globalState', () => {
             })
         },
 
-        isSidebarOpen: window.innerWidth > 1024,
-
-        isSidebarHovered: false,
-
         scrollingDown: false,
 
         scrollingUp: false,

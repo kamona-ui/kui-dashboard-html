@@ -121,6 +121,8 @@ document.addEventListener('alpine:init', () => {
             ...baseChartOptions,
             chart: {
                 type: 'donut',
+                width: '90%',
+                height: '90%',
                 toolbar: {
                     show: false,
                 },
@@ -134,13 +136,13 @@ document.addEventListener('alpine:init', () => {
             comparedResult: [3, 7],
             labels: ['A', 'B'],
             stroke: { width: 0 },
-            grid: {
-                padding: {
-                    right: -20,
-                    bottom: -8,
-                    left: -20,
-                },
-            },
+            // grid: {
+            //     padding: {
+            //         right: -20,
+            //         bottom: -8,
+            //         left: -20,
+            //     },
+            // },
             plotOptions: {
                 pie: {
                     donut: {

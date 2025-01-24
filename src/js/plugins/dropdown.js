@@ -61,7 +61,8 @@ function handleMenu(Alpine, el, modifiers) {
     }
 
     Alpine.bind(el, {
-        style: { display: 'none' },
+        style: 'display: none',
+        'x-cloak': true,
         ':id'() {
             return this.$id('dropdown-menu')
         },
