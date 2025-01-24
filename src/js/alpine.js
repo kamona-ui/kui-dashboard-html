@@ -8,6 +8,7 @@ Alpine.store('darkMode', {
     value: false,
     setValue(value) {
         window.localStorage.setItem('dark', value)
+        document.dispatchEvent(new CustomEvent('scheme:changed', {}))
     },
     getValue() {
         if (window.localStorage.getItem('dark')) {

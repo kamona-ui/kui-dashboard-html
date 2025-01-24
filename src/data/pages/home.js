@@ -39,4 +39,31 @@ export default {
             },
         ],
     },
+
+    simpleStatistics: [
+        {
+            title: '132 Sales',
+            icon: 'tabler--bell-dollar',
+            note: '12 Waiting payments',
+            colorClass: 'bg-primary',
+        },
+        {
+            title: '78 Orders',
+            icon: 'tabler--shopping-bag',
+            note: '32 Shiped',
+            colorClass: 'bg-green-500',
+        },
+        {
+            title: '60 Share',
+            icon: 'tabler--brand-twitter',
+            note: '16 Today',
+            colorClass: 'bg-blue-500',
+        },
+        {
+            title: '231 Likes',
+            icon: 'tabler--brand-facebook',
+            note: '23 Today',
+            colorClass: 'bg-blue-400',
+        },
+    ],
 }

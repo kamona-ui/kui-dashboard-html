@@ -15,6 +15,7 @@
                 srText="Quick actions"
                 icon="tabler--sparkles"
                 attrs="x-dropdown:trigger"
+
             }}{{/btn}}
 
             <div x-dropdown:menu.bottom-start class="z-50 w-48 rounded-md shadow-lg">
@@ -31,7 +32,7 @@
                         href="#"
                         class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
                     >
-                        <span aria-hidden="true" class="iconify h-4 w-4 tabler--settings-cog"></span>
+                        <span aria-hidden="true" class="iconify h-4 w-4 tabler--settings"></span>
                         <span class="text-sm leading-5">Site settings</span>
                     </a>
 
@@ -60,6 +61,7 @@
             srText="Search"
             icon="tabler--search"
             className="hidden md:inline-flex"
+
         }}{{/btn}}
     </div>
 
@@ -69,6 +71,7 @@
             variant="transparent"
             srText="Settings"
             icon="tabler--settings"
+
         }}{{/btn}}
 
         <!-- Notifications button -->
@@ -76,6 +79,7 @@
             variant="transparent"
             srText="Notifications"
             icon="tabler--bell"
+
         }}{{/btn}}
 
         <!-- Dark mode button -->
@@ -85,11 +89,11 @@
             className="p-2"
             attrs='@click="$store.darkMode.toggle()"'
         }}
-            <!-- Moon icon -->
-            <span x-show="!$store.darkMode.value" class="iconify h-6 w-6 tabler--moon"></span>
+        <!-- Moon icon -->
+        <span x-show="!$store.darkMode.value" class="iconify h-6 w-6 tabler--moon"></span>
 
-            <!-- Sun icon -->
-            <span x-show="$store.darkMode.value" class="iconify h-6 w-6 tabler--sun"></span>
+        <!-- Sun icon -->
+        <span x-show="$store.darkMode.value" class="iconify h-6 w-6 tabler--sun"></span>
         {{/btn}}
 
         <!-- User dropdown menu -->
@@ -100,17 +104,10 @@
                 className="p-0 overflow-hidden"
                 attrs="x-dropdown:trigger"
             }}
-                <img
-                    class="h-10 w-10 rounded-md object-cover"
-                    src="/images/avatar.jpeg"
-                    alt="User Name"
-                />
+            <img class="h-10 w-10 rounded-md object-cover" src="/images/avatar.jpeg" alt="User Name" />
             {{/btn}}
 
-            <div 
-                x-dropdown:menu.bottom-end 
-                class="z-50 w-48 rounded-md shadow-lg"
-            >
+            <div x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
                 <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
                     <a
                         href="#"
@@ -144,6 +141,7 @@
         variant="transparent"
         srText="Search"
         icon="tabler--search"
+
     }}{{/btn}}
 
     <!-- Logo -->
@@ -159,5 +157,6 @@
         srText="Toggle sidebar"
         icon="tabler--menu"
         attrs='@click="isSidebarOpen = true"'
+
     }}{{/btn}}
 </div>
