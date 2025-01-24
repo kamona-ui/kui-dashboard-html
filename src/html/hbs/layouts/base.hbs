@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="{{ baseUrl 'favicon.ico' }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Admin dashboard template built with tailwindcss and alpinejs." />
+        <meta name="keywords" content="Admin, Dashboard, Template, HTML, CSS, JavaScript, Tailwindcss, Alpinejs" />
+        <meta name="author" content="Ahmed Kamel" />
+
+        <title>{{ title }} {{#if pageTitle}} | {{ pageTitle }} {{/if}}</title>
+
+        <!-- Fonts -->
+        {{!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        /> --}}
+
+        <style>
+            [x-cloak] {
+                display: none;
+            }
+        </style>
+
+        <link rel="stylesheet" href="{{ resolve-from-root '../css/main.css' }}" />
+
+        {{> styles}}
+    </head>
+
+    <body class="font-sans antialiased">
+        {{> @partial-block}}
+
+        {{#unless no-script}}
+        {{> beforeScript}}
+        <script type="module" src="{{ resolve-from-root '../js/alpine.js' }}"></script>
+        {{> beforeAlpineStart}}
+        <script type="module" src="{{ resolve-from-root '../js/main.js' }}"></script>
+        {{> afterScript}}
+        {{/unless}}
+    </body>
+</html>

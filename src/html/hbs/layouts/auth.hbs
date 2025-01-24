@@ -1,60 +1,23 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" href="{{ baseUrl 'favicon.ico' }}" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Admin dashboard template built with tailwindcss and alpinejs." />
-        <meta name="keywords" content="Admin, Dashboard, Template, HTML, CSS, JavaScript, Tailwindcss, Alpinejs" />
-        <meta name="author" content="Kamona UI" />
+{{#> layouts/base pageTitle=pageTitle }}
+    <div x-data :class="{ 'dark': $store.darkMode.value }">
+        <div class="bg-gray-100 dark:bg-dark-eval-0">
+            <div class="container mx-auto flex min-h-screen flex-col gap-24 p-4 sm:p-6">
+                <div class="flex flex-1 flex-col items-center justify-center gap-24">
+                    <div class="flex-shrink-0">
+                        <a href="{{ baseUrl '/' }}">
+                            {{> partials/logo className="h-20 w-20" }}
 
-        <title>{{ title }} {{#if pageTitle}} | {{ pageTitle }} {{/if}}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-        />
-
-        <style>
-            [x-cloak] {
-                display: none;
-            }
-        </style>
-
-        <link rel="stylesheet" href="{{ resolve-from-root '../css/main.css' }}" />
-        {{> styles}}
-    </head>
-
-    <body class="font-sans antialiased">
-        <div x-data :class="{ 'dark': $store.darkMode.value }">
-            <div class="bg-gray-100 dark:bg-dark-eval-0">
-                <div class="container mx-auto flex min-h-screen flex-col gap-24 p-4 sm:p-6">
-                    <div class="flex flex-1 flex-col items-center justify-center gap-24">
-                        <div class="flex-shrink-0">
-                            <a href="{{ baseUrl '/' }}">
-                                {{> partials/logo className="h-20 w-20" }}
-
-                                <span class="sr-only">Home page</span>
-                            </a>
-                        </div>
-
-                        <main class="w-full sm:max-w-md">
-                            {{> @partial-block}}
-                        </main>
+                            <span class="sr-only">Home page</span>
+                        </a>
                     </div>
 
-                    {{> partials/footer}}
+                    <main class="w-full sm:max-w-md">
+                        {{> @partial-block}}
+                    </main>
                 </div>
+
+                {{> partials/footer}}
             </div>
         </div>
-
-        {{> beforeScript}}
-        <script type="module" src="{{ resolve-from-root '../js/alpine.js' }}"></script>
-        {{> beforeAlpineStart}}
-        <script type="module" src="{{ resolve-from-root '../js/main.js' }}"></script>
-        {{> afterScript}}
-    </body>
-</html>
+    </div>
+{{/layouts/base}}

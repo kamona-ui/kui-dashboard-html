@@ -19,6 +19,25 @@
 
 <h1 class="sr-only">Home page</h1>
 
+<div class="grid gap-4">
+    <!--Quick statistics  -->
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <h2 class="sr-only">Quick statistics</h2>
+
+        {{#each pages.home.charts.quickStaticsCharts}}
+            {{#> partials/quick-statistics-card icon=icon title=title total=total percentage=percentage status=status }}
+                <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, '{{ title }}')" class="max-h-16">
+                    <div x-ref="quickStatisticsChartEl"></div>
+                </div>
+            {{/partials/quick-statistics-card}}
+        {{/each}}
+    </section>
+</div>
+
 {{/layouts/main}}
 
-{{#*inline "beforeScript"}}{{/inline}} {{#*inline "beforeAlpineStart"}}{{/inline}} {{#*inline "afterScript"}}{{/inline}}
+{{#*inline "beforeScript"}}{{/inline}} {{#*inline "afterScript"}}{{/inline}}
+
+{{#*inline "beforeAlpineStart"}}
+<script type="module" src="{{ resolve-from-root '../js/demo.js' }}"></script>
+{{/inline}}
