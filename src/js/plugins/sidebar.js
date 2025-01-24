@@ -11,10 +11,17 @@ export default function (Alpine) {
         toggle() {
             this.isOpen = !this.isOpen
         },
+        handleWindowResize() {
+            if (window.innerWidth < 1024) {
+                this.isOpen = false
+            } else {
+                this.isOpen = true
+            }
+        },
     })
 
     Alpine.directive('sidebar', (el, { value }) => {
-        if (!value) handleRoot(Alpine, el) 
+        if (!value) handleRoot(Alpine, el)
     }).before('bind')
 }
 
@@ -22,7 +29,7 @@ function handleRoot(Alpine, el) {
     Alpine.bind(el, {
         'x-data'() {
             return {
-                get isOpen(){
+                get isOpen() {
                     return this.$store.sidebar.isOpen
                 },
                 get isHovered() {
@@ -30,7 +37,6 @@ function handleRoot(Alpine, el) {
                 },
                 toggle() {
                     this.$store.sidebar.toggle()
-                    
                 },
                 open() {
                     this.$store.sidebar.open()
@@ -38,18 +44,21 @@ function handleRoot(Alpine, el) {
                 close() {
                     this.$store.sidebar.close()
                 },
+                handleWindowResize() {
+                    this.$store.sidebar.handleWindowResize()
+                },
             }
         },
         'x-init'() {
             el.addEventListener('mouseenter', () => {
                 if (window.innerWidth > 1024) {
                     this.$store.sidebar.isHovered = true
-                  }
+                }
             })
             el.addEventListener('mouseleave', () => {
                 if (window.innerWidth > 1024) {
                     this.$store.sidebar.isHovered = false
-                  }
+                }
             })
         },
     })

@@ -1,6 +1,6 @@
 <!-- Sidebar overly -->
 <div
-    style="display: none;"
+    style="display: none"
     x-show="$store.sidebar.isOpen"
     @click="$store.sidebar.close()"
     class="fixed inset-0 z-40 bg-black/50 duration-700 md:hidden"
@@ -15,11 +15,12 @@
 <!-- Sidebar -->
 <aside
     x-sidebar
-    class="fixed inset-y-0 z-40 flex flex-col space-y-6 w-64 -translate-x-full lg:translate-x-0 bg-white py-4 shadow-lg transition-all duration-200 dark:bg-dark-eval-1 md:transition-[width]"
+    class="fixed inset-y-0 z-40 flex w-64 -translate-x-full flex-col gap-6 bg-white py-3 shadow-lg transition-all duration-200 dark:bg-dark-eval-1 md:transition-[width] lg:translate-x-0"
     :class="{
         'translate-x-0 w-64': isOpen || isHovered,
         '-translate-x-full w-64 md:w-16 md:translate-x-0': !isOpen && !isHovered,
     }"
+    @resize.window="handleWindowResize"
 >
     <!-- Sidebar header -->
     <div class="flex flex-shrink-0 items-center justify-between px-3">
@@ -79,7 +80,7 @@
     </div>
 
     <!-- Sidebar content -->
-    <nav x-data="perfectScroll" aria-label="main" class="relative flex flex-1 flex-col gap-4 px-3">
+    <nav x-perfect-scroll aria-label="main" class="relative flex flex-1 flex-col gap-4 px-3">
         {{#each navigationLinks}}
         {{#unless links}}
         <!-- Link -->
@@ -114,11 +115,7 @@
                     {{ title }}
                 </span>
 
-                <span
-                    x-show="isOpen || isHovered"
-                    aria-hidden="true"
-                    class="relative ms-auto block h-6 w-6"
-                >
+                <span x-show="isOpen || isHovered" aria-hidden="true" class="relative ms-auto block h-6 w-6">
                     <span
                         :class="open ? '-rotate-45' : 'rotate-45'"
                         class="absolute right-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
@@ -135,7 +132,7 @@
             <!-- Base: transition-colors hover:text-gray-900 dark:hover:text-gray-100 -->
             <!-- Active: text-gray-900 dark:text-gray-200 -->
             <!-- Inactive: text-gray-500 dark:text-gray-400 -->
-            <div x-show="open && (isOpen || isHovered)" x-collapse>
+            <div x-cloak x-show="open && (isOpen || isHovered)" x-collapse>
                 <ul
                     class="relative ml-5 px-0 pb-0 pt-2 before:absolute before:inset-y-0 before:left-0 before:block before:w-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
                 >

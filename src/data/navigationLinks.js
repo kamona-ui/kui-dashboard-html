@@ -28,6 +28,66 @@ export default [
                 title: 'Register',
                 url: 'auth/register.html',
             },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
+            {
+                title: 'Register',
+                url: 'auth/register.html',
+            },
         ],
     },
 ]
