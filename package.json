@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build --emptyOutDir",
+    "build": "vite build",
     "preview": "vite preview",
-    "format": "prettier --write \"src\" \"dist/**/*.html\"",
+    "format": "prettier --write \"src\"",
     "deploy": "gh-pages -d dist",
     "p": "prettier --write"
   },

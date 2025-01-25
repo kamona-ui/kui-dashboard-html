@@ -69,7 +69,7 @@ export default {
 
         const tag = href ? 'a' : 'button'
 
-        return `
+        const element = `
             <${tag} ${href ? 'href="' + href + '"' : ''} ${attrs} type="${type}" class="${twMerge(baseClasses, className)}">
                 ${srt}
                 ${i}
@@ -79,6 +79,7 @@ export default {
                 ${ei}
             </${tag}>
         `
+        return element.replace(/(\r\n|\r|\n|\u2028|\u2029) {2,}/g, '\n')
     },
     'base-card': function (context) {
         const { tag = 'div', attrs = '', className = '' } = context.hash

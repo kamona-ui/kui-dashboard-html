@@ -27,6 +27,8 @@
         <link rel="stylesheet" href="{{ resolve-from-root '../css/main.css' }}" />
 
         {{> styles}}
+
+        {{> head-scripts}}
     </head>
 
     <body class="font-sans antialiased">
@@ -34,9 +36,12 @@
 
         {{#unless no-script}}
         {{> beforeScript}}
-        <script type="module" src="{{ resolve-from-root '../js/alpine.js' }}"></script>
-        {{> beforeAlpineStart}}
+        <script  type="module" src="{{ resolve-from-root '../js/alpine.js' }}"></script>
         <script type="module" src="{{ resolve-from-root '../js/main.js' }}"></script>
+        {{> beforeAlpineStart}}
+        <script type="module">
+            window.Alpine && window.Alpine.start()
+        </script>
         {{> afterScript}}
         {{/unless}}
     </body>

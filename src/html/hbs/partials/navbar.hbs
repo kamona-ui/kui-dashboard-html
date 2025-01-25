@@ -14,12 +14,8 @@
                 variant="transparent"
                 srText="Quick actions"
                 icon="tabler--sparkles"
-                attrs="x-dropdown:trigger"
-
-
-
-
-            }}{{/btn}}
+                attrs="x-dropdown:trigger"}}
+            {{/btn}}
 
             <div x-cloak x-dropdown:menu.bottom-start class="z-50 w-48 rounded-md shadow-lg">
                 <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
@@ -63,12 +59,8 @@
             variant="transparent"
             srText="Search"
             icon="tabler--search"
-            className="hidden md:inline-flex"
-
-
-
-
-        }}{{/btn}}
+            className="hidden md:inline-flex"}}
+        {{/btn}}
     </div>
 
     <div class="flex items-center gap-2">
@@ -76,23 +68,15 @@
         {{#btn
             variant="transparent"
             srText="Settings"
-            icon="tabler--settings"
-
-
-
-
-        }}{{/btn}}
+            icon="tabler--settings"}}
+        {{/btn}}
 
         <!-- Notifications button -->
         {{#btn
             variant="transparent"
             srText="Notifications"
-            icon="tabler--bell"
-
-
-
-
-        }}{{/btn}}
+            icon="tabler--bell"}}
+        {{/btn}}
 
         <!-- Dark mode button -->
         {{#btn
@@ -152,12 +136,8 @@
     {{#btn
         variant="transparent"
         srText="Search"
-        icon="tabler--search"
-
-
-
-
-    }}{{/btn}}
+        icon="tabler--search"}}
+    {{/btn}}
 
     <!-- Logo -->
     <a href="{{ baseUrl '/' }}">
@@ -171,10 +151,6 @@
         variant="transparent"
         srText="Toggle sidebar"
         icon="tabler--menu"
-        attrs='@click="$store.sidebar.open()"'
-
-
-
-
-    }}{{/btn}}
+        attrs='@click="$store.sidebar.open()"'}}
+    {{/btn}}
 </div>

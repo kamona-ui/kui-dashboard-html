@@ -1,6 +1,7 @@
-{{#*inline "styles"}}{{/inline}}
-
 {{#> layouts/main activeLink='Dashboard' breadcrumb=pages.home.breadcrumb}}
+
+{{#*inline "styles"}}{{/inline}}
+{{#*inline "head-scripts"}}{{/inline}}
 
 {{#*inline "header"}}
 {{> partials/page-header title='Dashboard' }}
@@ -15,7 +16,7 @@
 
         {{#each pages.home.charts.quickStaticsCharts}}
         {{#> partials/quick-statistics-card icon=icon title=title total=total percentage=percentage status=status }}
-        <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, '{{ title }}')" class="max-h-16">
+        <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, '{{ ../title }}')" class="max-h-16">
             <div x-ref="quickStatisticsChartEl"></div>
         </div>
         {{/partials/quick-statistics-card}}
@@ -247,10 +248,13 @@
     </section>
 </div>
 
-{{/layouts/main}}
+{{#*inline "beforeScript"}}
+{{/inline}}
 
-{{#*inline "beforeScript"}}{{/inline}} {{#*inline "afterScript"}}{{/inline}}
+{{#*inline "afterScript"}}{{/inline}}
 
 {{#*inline "beforeAlpineStart"}}
 <script type="module" src="{{ resolve-from-root '../js/demo.js' }}"></script>
 {{/inline}}
+
+{{/layouts/main}}

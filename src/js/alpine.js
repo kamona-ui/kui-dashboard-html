@@ -55,25 +55,6 @@ Alpine.data('globalState', () => {
     }
 })
 
-Alpine.data('perfectScroll', () => {
-    // let ps
-    // const update = () => {
-    //     if (ps) {
-    //         ps.update()
-    //     }
-    // }
-    // return {
-    //     init() {
-    //         ps = new PerfectScrollbar(this.$el, {
-    //             wheelSpeed: 2,
-    //             wheelPropagation: false,
-    //             minScrollbarLength: 20,
-    //         })
-    //     },
-    //     update,
-    // }
-})
-
 Alpine.plugin(AlpineCollapse)
 Alpine.plugin(AlpineAnchor)
 Alpine.plugin(kuiPlugin)

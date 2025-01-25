@@ -136,13 +136,6 @@ document.addEventListener('alpine:init', () => {
             comparedResult: [3, 7],
             labels: ['A', 'B'],
             stroke: { width: 0 },
-            // grid: {
-            //     padding: {
-            //         right: -20,
-            //         bottom: -8,
-            //         left: -20,
-            //     },
-            // },
             plotOptions: {
                 pie: {
                     donut: {
@@ -254,7 +247,7 @@ document.addEventListener('alpine:init', () => {
                 sparkline: {
                     enabled: true,
                 },
-                background: 'transparent'
+                background: 'transparent',
             },
             stroke: {
                 width: 2,

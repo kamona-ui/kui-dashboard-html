@@ -1,33 +1,33 @@
 {{#base-card className="p-4"}}
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-6">
-            <span class="iconify {{ ../icon }} w-8 h-8 text-primary"></span>
+<div class="flex items-center justify-between">
+    <div class="flex items-center gap-6">
+        <span class="iconify {{ ../icon }} w-8 h-8 text-primary"></span>
 
-            <div class="flex items-center gap-2">
-                {{#if (eq ../status "up")}}
-                <span class="iconify h-5 w-5 text-green-500 tabler--trending-up"></span>
-                <span class="text-xs font-medium text-green-500">{{ ../../percentage }}</span>
-                {{else if (eq ../../status "down")}}
-                <span class="iconify h-5 w-5 text-red-500 tabler--trending-down"></span>
-                <span class="text-xs font-medium text-red-500">{{ ../../percentage }}</span>
-                {{else}}
-                <span class="iconify h-5 w-5 text-yellow-500 tabler--minus"></span>
-                <span class="text-xs font-medium text-yellow-500">{{ ../../percentage }}</span>
-                {{/if}}
-            </div>
+        <div class="flex items-center gap-2">
+            {{#if (eq ../status "up")}}
+            <span class="iconify h-5 w-5 text-green-500 tabler--trending-up"></span>
+            <span class="text-xs font-medium text-green-500">{{ ../../percentage }}</span>
+            {{else if (eq ../../status "down")}}
+            <span class="iconify h-5 w-5 text-red-500 tabler--trending-down"></span>
+            <span class="text-xs font-medium text-red-500">{{ ../../percentage }}</span>
+            {{else}}
+            <span class="iconify h-5 w-5 text-yellow-500 tabler--minus"></span>
+            <span class="text-xs font-medium text-yellow-500">{{ ../../percentage }}</span>
+            {{/if}}
         </div>
-
-        {{> partials/card-actions-menu }}
     </div>
 
-    <div class="relative mt-2 grid grid-cols-2">
-        <div>
-            <h4 class="text-3xl font-semibold">{{ ../total }}</h4>
-            <p class="text-base font-medium text-gray-500 dark:text-gray-400">
-                {{ ../title }}
-            </p>
-        </div>
+    {{> partials/card-actions-menu }}
+</div>
 
-        {{> @partial-block}}
+<div class="relative mt-2 grid grid-cols-2">
+    <div>
+        <h4 class="text-3xl font-semibold">{{ ../total }}</h4>
+        <p class="text-base font-medium text-gray-500 dark:text-gray-400">
+            {{ ../title }}
+        </p>
     </div>
+
+    {{> @partial-block}}
+</div>
 {{/base-card}}

@@ -42,17 +42,17 @@ export default {
         usageCharts: [
             {
                 title: 'Memory Usage',
-                total: ''
+                total: '',
             },
             {
                 title: 'Disk Usage',
-                total: ''
+                total: '',
             },
             {
                 title: 'CPU Usage',
-                total: ''
+                total: '',
             },
-        ]
+        ],
     },
 
     simpleStatistics: [
