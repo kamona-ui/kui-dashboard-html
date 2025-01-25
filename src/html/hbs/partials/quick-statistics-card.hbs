@@ -1,64 +1,33 @@
-<div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+{{#base-card className="p-4"}}
     <div class="flex items-center justify-between">
         <div class="flex items-center gap-6">
-            <span class="iconify {{ icon }} w-8 h-8 text-primary"></span>
+            <span class="iconify {{ ../icon }} w-8 h-8 text-primary"></span>
 
             <div class="flex items-center gap-2">
-                {{#if (eq status "up")}}
+                {{#if (eq ../status "up")}}
                 <span class="iconify h-5 w-5 text-green-500 tabler--trending-up"></span>
-                <span class="text-xs font-medium text-green-500">{{ percentage }}</span>
-                {{else if (eq status "down")}}
+                <span class="text-xs font-medium text-green-500">{{ ../../percentage }}</span>
+                {{else if (eq ../../status "down")}}
                 <span class="iconify h-5 w-5 text-red-500 tabler--trending-down"></span>
-                <span class="text-xs font-medium text-red-500">{{ percentage }}</span>
+                <span class="text-xs font-medium text-red-500">{{ ../../percentage }}</span>
                 {{else}}
                 <span class="iconify h-5 w-5 text-yellow-500 tabler--minus"></span>
-                <span class="text-xs font-medium text-yellow-500">{{ percentage }}</span>
+                <span class="text-xs font-medium text-yellow-500">{{ ../../percentage }}</span>
                 {{/if}}
             </div>
         </div>
 
-        <div x-dropdown>
-            {{#btn
-                variant="transparent"
-                srText="Card Actions"
-                icon="tabler--dots"
-                iconSizeClasses="w-5 h-5"
-                className="p-1.5"
-                attrs="x-dropdown:trigger"
-
-
-
-
-            }}{{/btn}}
-
-            <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
-                <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
-                    <a
-                        href="#"
-                        class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
-                    >
-                        Action 1
-                    </a>
-
-                    <a
-                        href="#"
-                        class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
-                    >
-                        Action 2
-                    </a>
-                </div>
-            </div>
-        </div>
+        {{> partials/card-actions-menu }}
     </div>
 
     <div class="relative mt-2 grid grid-cols-2">
         <div>
-            <h4 class="text-3xl font-semibold">{{ total }}</h4>
+            <h4 class="text-3xl font-semibold">{{ ../total }}</h4>
             <p class="text-base font-medium text-gray-500 dark:text-gray-400">
-                {{ title }}
+                {{ ../title }}
             </p>
         </div>
 
         {{> @partial-block}}
     </div>
-</div>
+{{/base-card}}

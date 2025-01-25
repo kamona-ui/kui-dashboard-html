@@ -80,4 +80,15 @@ export default {
             </${tag}>
         `
     },
+    'base-card': function (context) {
+        const { tag = 'div', attrs = '', className = '' } = context.hash
+
+        let baseClasses = 'rounded-md bg-white shadow-md dark:bg-dark-eval-1'
+
+        return `
+            <${tag} class="${twMerge(baseClasses, className)}" ${attrs}>
+                ${context.fn?.()}
+            </${tag}>
+        `
+    },
 }

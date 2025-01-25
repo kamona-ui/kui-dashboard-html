@@ -11,7 +11,7 @@ export default [
         links: [
             {
                 title: 'Blank',
-                url: 'blank.html',
+                url: 'pages/blank.html',
             },
         ],
     },

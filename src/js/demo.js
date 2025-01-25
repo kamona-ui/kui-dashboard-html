@@ -234,4 +234,57 @@ document.addEventListener('alpine:init', () => {
             },
         }
     })
+
+    Alpine.data('usageChart', (el, name) => {
+        const usageChart = new ApexCharts(el, {
+            ...baseChartOptions,
+            series: [
+                {
+                    name: name,
+                    data: getRandomChartData(20),
+                },
+            ],
+            chart: {
+                height: '100%',
+                width: '100%',
+                type: 'area',
+                toolbar: {
+                    show: false,
+                },
+                sparkline: {
+                    enabled: true,
+                },
+                background: 'transparent'
+            },
+            stroke: {
+                width: 2,
+                curve: 'smooth',
+            },
+            title: {
+                show: false,
+            },
+            grid: {
+                show: false,
+                padding: {
+                    left: -2,
+                    right: -2,
+                    bottom: -2,
+                },
+            },
+            tooltip: {
+                custom: function ({ series, dataPointIndex, seriesIndex }) {
+                    const v = series[seriesIndex][dataPointIndex]
+                    return `<div class="p-2 text-xs text-opacity-75 font-medium dark:bg-dark-eval-3">In use ${v}% ${v * 100} MB</div>`
+                },
+            },
+        })
+
+        usageChart.render()
+
+        return {
+            init() {
+                onInit(usageChart)
+            },
+        }
+    })
 })
