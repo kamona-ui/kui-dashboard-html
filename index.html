@@ -1,494 +1,1783 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="favicon.ico" />
-    <title>K UI - Dashboard</title>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/kui-dashboard-html/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Admin dashboard template built with tailwindcss and alpinejs." />
+        <meta name="keywords" content="Admin, Dashboard, Template, HTML, CSS, JavaScript, Tailwindcss, Alpinejs" />
+        <meta name="author" content="Ahmed Kamel" />
 
-    <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
+        <title>K UI Dashboard Template </title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="assets/css/vendor/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+        <!-- Fonts -->
 
-    <!-- Scripts -->
-    <script src="assets/js/vendor/alpinejs-collapse.min.js" defer></script>
-    <script src="assets/js/vendor/alpinejs.min.js" defer></script>
-  </head>
-  <body class="font-sans antialiased">
-    <div x-data="globalState" :class="{ dark: isDarkMode }" @resize.window="handleWindowResize">
-      <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-bg dark:text-gray-100">
-        <!-- Sidebar overly -->
-        <div
-          x-show="isSidebarOpen"
-          @click="isSidebarOpen = false"
-          class="fixed inset-0 z-30 bg-black/50 lg:hidden"
-        ></div>
+        <style>
+            [x-cloak] {
+                display: none;
+            }
+        </style>
 
-        <aside
-          style="transition-property: width, transform; transition-duration: 150ms"
-          class="fixed inset-y-0 z-30 flex flex-col py-4 space-y-6 bg-white shadow-lg dark:bg-dark-eval-1"
-          :class="{
-    'translate-x-0 w-64':
-        isSidebarOpen || isSidebarHovered,
-    '-translate-x-full w-64 md:w-16 md:translate-x-0':
-        !isSidebarOpen && !isSidebarHovered,
-    }"
-          @mouseenter="handleSidebarHover(true)"
-          @mouseleave="handleSidebarHover(false)"
-        >
-          <!-- Sidebar header -->
-          <div class="flex items-center justify-between flex-shrink-0 px-3">
-            <!-- Logo -->
-            <a href="dashboard.html" class="inline-flex items-center"
-              ><svg
-                aria-hidden="true"
-                class="w-10 h-auto"
-                viewBox="0 0 40 40"
-                fill="#A855F7"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
-                <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
-                <path
-                  d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
-                />
-                <path
-                  d="M16.9124 7.7235L20 7.10598L22.47 7.7235L20.9263 9.26727C20.9263 9.26727 20.7204 27.4839 20.9263 28.1014C21.1321 28.7189 21.729 30.0774 22.47 30.5714C23.3963 31.1889 27.9489 31.2883 29.1729 28.8823C29.556 28.1293 29.5872 27.9014 29.7171 26.9514C29.7393 26.7894 29.7643 26.6064 29.7945 26.3962C29.8955 25.6912 29.8895 24.8909 29.8832 24.0704C29.8817 23.8711 29.8802 23.6706 29.8802 23.47V12.3548L28.0277 9.57603V9.26727L38.8341 11.4286V12.3548L37.2903 12.9723V26.8664L38.8341 28.1014L34.2028 29.3725L35.4378 27.4839V12.9723L33.2765 11.4286L31.424 12.9723L31.1152 25.0138C31.1152 25.8618 31.017 27.1791 30.7193 28.3251C30.6106 28.7435 30.1101 29.5467 30.1101 29.5467C30.1101 29.5467 29.6731 30.2533 29.2627 30.5714C28.8853 30.8639 28.1871 31.1541 28.1871 31.1541C28.1871 31.1541 26.0347 32.0258 24.0721 32.4043C23.08 32.5957 22.1571 32.4413 21.5645 32.2043C21.541 32.1912 21.5168 32.1778 21.492 32.1641C20.9896 31.8865 20.243 31.4739 19.6681 30.5714C19.1558 29.767 18.765 28.7318 18.765 27.4839V9.57603L16.9124 7.7235Z"
-                />
-              </svg>
-              <span class="sr-only">Dashbaord home</span>
-            </a>
 
-            <!-- Toggle button -->
 
-            <button
-              type="button"
-              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-              @click="isSidebarOpen = !isSidebarOpen"
-              x-show="isSidebarOpen || isSidebarHovered"
-            >
-              <span class="sr-only">Toggle sidebar</span>
+      <script type="module" crossorigin src="/kui-dashboard-html/js/index-page-DVX40l3v.js"></script>
+      <link rel="modulepreload" crossorigin href="/kui-dashboard-html/js/main-CVs6CzxB.js">
+      <link rel="stylesheet" crossorigin href="/kui-dashboard-html/css/main.css">
+    </head>
 
-              <span class="sr-only">Toggle sidebar</span>
-              <!-- menu-fold-right icon -->
-              <svg
-                x-show="!isSidebarOpen"
-                aria-hidden="true"
-                class="w-6 h-6 hidden lg:block"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <!-- menu-fold-left icon -->
-              <svg
-                x-show="isSidebarOpen"
-                aria-hidden="true"
-                class="w-6 h-6 hidden lg:block"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-
-              <!-- x icon -->
-              <svg
-                aria-hidden="true"
-                class="w-6 h-6 lg:hidden"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Sidebar content -->
-          <nav x-data="perfectScroll" aria-label="main" class="relative flex flex-col flex-1 gap-4 px-3">
-            <!-- Link -->
-            <!-- base classes: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
-            <!-- active classes: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
-            <!-- inactive classes: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
-            <a
-              href="/"
-              class="flex items-center flex-shrink-0 gap-2 p-2 overflow-hidden text-white transition-colors bg-purple-500 rounded-md shadow-lg hover:bg-purple-600"
-            >
-              <!-- Dashboard icon -->
-              <svg
-                aria-hidden="true"
-                class="flex-shrink-0 w-6 h-6"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5.5 12.5C5.22386 12.5 5 12.7239 5 13C5 13.2761 5.22386 13.5 5.5 13.5H7C7.27614 13.5 7.5 13.2761 7.5 13C7.5 12.7239 7.27614 12.5 7 12.5H5.5Z"
-                />
-                <path
-                  d="M6.93935 7.93935C7.13462 7.74409 7.4512 7.74409 7.64646 7.93935L8.70712 9.00001C8.90238 9.19528 8.90238 9.51186 8.70712 9.70712C8.51186 9.90238 8.19528 9.90238 8.00001 9.70712L6.93935 8.64646C6.74409 8.4512 6.74409 8.13462 6.93935 7.93935Z"
-                />
-                <path
-                  d="M17 12.5C16.7239 12.5 16.5 12.7239 16.5 13C16.5 13.2761 16.7239 13.5 17 13.5H18.5C18.7761 13.5 19 13.2761 19 13C19 12.7239 18.7761 12.5 18.5 12.5H17Z"
-                />
-                <path
-                  d="M15.4394 10.0606C15.2441 9.86538 15.2441 9.5488 15.4394 9.35354L16.5 8.29288C16.6953 8.09762 17.0119 8.09762 17.2071 8.29288C17.4024 8.48814 17.4024 8.80472 17.2071 8.99999L16.1465 10.0606C15.9512 10.2559 15.6346 10.2559 15.4394 10.0606Z"
-                />
-                <path
-                  d="M12.9661 12.741C12.9882 12.8236 13 12.9104 13 13C13 13.5523 12.5523 14 12 14C11.4477 14 11 13.5523 11 13C11 12.4477 11.4477 12 12 12C12.0896 12 12.1764 12.0118 12.259 12.0339L13 11.2929C13.1953 11.0976 13.5119 11.0976 13.7071 11.2929C13.9024 11.4881 13.9024 11.8047 13.7071 12L12.9661 12.741Z"
-                />
-                <path
-                  d="M12 8.5C11.7239 8.5 11.5 8.27614 11.5 8V6.5C11.5 6.22386 11.7239 6 12 6C12.2761 6 12.5 6.22386 12.5 6.5V8C12.5 8.27614 12.2761 8.5 12 8.5Z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12 3C9.34784 3 6.8043 4.05357 4.92893 5.92893C3.05357 7.8043 2 10.3478 2 13C2 14.3132 2.25866 15.6136 2.7612 16.8268C3.26375 18.0401 4.00035 19.1425 4.92893 20.0711C5.11647 20.2586 5.37082 20.364 5.63604 20.364H18.364C18.6292 20.364 18.8835 20.2586 19.0711 20.0711C19.9997 19.1425 20.7362 18.0401 21.2388 16.8268C21.7413 15.6136 22 14.3132 22 13C22 10.3478 20.9464 7.8043 19.0711 5.92893C17.1957 4.05357 14.6522 3 12 3ZM6.34315 7.34315C7.84344 5.84285 9.87827 5 12 5C14.1217 5 16.1566 5.84285 17.6569 7.34315C19.1571 8.84344 20 10.8783 20 13C20 14.0506 19.7931 15.0909 19.391 16.0615C19.0406 16.9075 18.5479 17.6861 17.9353 18.364H6.06469C5.45205 17.6861 4.95938 16.9075 4.60896 16.0615C4.20693 15.0909 4 14.0506 4 13C4 10.8783 4.84285 8.84344 6.34315 7.34315Z"
-                />
-              </svg>
-
-              <!-- Link title -->
-              <span class="text-base font-medium" x-show="isSidebarOpen || isSidebarHovered"> Dashboard </span>
-            </a>
-          </nav>
-          <!-- Sidebar footer -->
-          <div class="flex-shrink-0 px-3 lg:hidden">
-            <button
-              type="button"
-              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-              @click="isSidebarOpen = !isSidebarOpen"
-              x-show="!isSidebarOpen"
-            >
-              <span class="sr-only">Toggle sidebar</span>
-
-              <!-- menu-fold-right icon -->
-              <svg
-                x-show="!isSidebarOpen"
-                aria-hidden="true"
-                class="w-6 h-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <!-- menu-fold-left icon -->
-              <svg
-                x-show="isSidebarOpen"
-                aria-hidden="true"
-                class="w-6 h-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
-        </aside>
-        <!--  -->
-        <div
-          style="transition-property: margin; transition-duration: 150ms"
-          class="flex flex-col min-h-screen"
-          :class="{
-              'lg:ml-64': isSidebarOpen,
-              'md:ml-16': !isSidebarOpen,
-            }"
-        >
-          <!-- Navbar -->
-          <nav
-            aria-label="secondary"
-            class="sticky top-0 z-10 flex items-center justify-between px-6 py-4 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
-            :class="{
-    '-translate-y-full': scrollingDown,
-    'translate-y-0': scrollingUp,
-  }"
-          >
-            <div class="flex items-center gap-2">
-              <!-- Dark mode button -->
-
-              <button
-                type="button"
-                class="md:hidden inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-                @click="toggleDarkMode"
-              >
-                <span class="sr-only">Toggle dark mode</span>
-
-                <!-- Moon icon -->
-                <svg
-                  x-show="!isDarkMode"
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
+    <body class="font-sans antialiased">
+            <div x-data="globalState" :class="{ 'dark': $store.darkMode.value }">
+                <div class="min-h-screen flex text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-100">
+                    <!-- Sidebar overly -->
+                    <div
+                        style="display: none"
+                        x-show="$store.sidebar.isOpen"
+                        @click="$store.sidebar.close()"
+                        class="fixed inset-0 z-40 bg-black/50 duration-700 md:hidden"
+                        x-transition:enter="transition duration-200 ease-in-out"
+                        x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100"
+                        x-transition:leave="transition duration-150 ease-in-out"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0"
+                    ></div>
+                    
+                    <!-- Sidebar -->
+                    <aside
+                        x-sidebar
+                        class="fixed inset-y-0 z-40 flex w-64 -translate-x-full flex-col gap-6 bg-white py-3 shadow-lg transition-all duration-200 dark:bg-dark-eval-1 md:transition-[width] lg:translate-x-0"
+                        :class="{
+                            'translate-x-0 w-64': isOpen || isHovered,
+                            '-translate-x-full w-64 md:w-16 md:translate-x-0': !isOpen && !isHovered,
+                        }"
+                        @resize.window="handleWindowResize"
+                    >
+                        <!-- Sidebar header -->
+                        <div class="flex flex-shrink-0 items-center justify-between px-3">
+                            <!-- Logo -->
+                            <a href="/kui-dashboard-html/" class="inline-flex items-center">
+                                <svg
+                                    aria-hidden="true"
+                                    class=" h-auto w-10 "
+                                    viewBox="0 0 40 40"
+                                    fill=" #A855F7 "
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
+                                    <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
+                                    <path
+                                        d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
+                                    />
+                                    <path
+                                        d="M16.9124 7.7235L20 7.10598L22.47 7.7235L20.9263 9.26727C20.9263 9.26727 20.7204 27.4839 20.9263 28.1014C21.1321 28.7189 21.729 30.0774 22.47 30.5714C23.3963 31.1889 27.9489 31.2883 29.1729 28.8823C29.556 28.1293 29.5872 27.9014 29.7171 26.9514C29.7393 26.7894 29.7643 26.6064 29.7945 26.3962C29.8955 25.6912 29.8895 24.8909 29.8832 24.0704C29.8817 23.8711 29.8802 23.6706 29.8802 23.47V12.3548L28.0277 9.57603V9.26727L38.8341 11.4286V12.3548L37.2903 12.9723V26.8664L38.8341 28.1014L34.2028 29.3725L35.4378 27.4839V12.9723L33.2765 11.4286L31.424 12.9723L31.1152 25.0138C31.1152 25.8618 31.017 27.1791 30.7193 28.3251C30.6106 28.7435 30.1101 29.5467 30.1101 29.5467C30.1101 29.5467 29.6731 30.2533 29.2627 30.5714C28.8853 30.8639 28.1871 31.1541 28.1871 31.1541C28.1871 31.1541 26.0347 32.0258 24.0721 32.4043C23.08 32.5957 22.1571 32.4413 21.5645 32.2043C21.541 32.1912 21.5168 32.1778 21.492 32.1641C20.9896 31.8865 20.243 31.4739 19.6681 30.5714C19.1558 29.767 18.765 28.7318 18.765 27.4839V9.57603L16.9124 7.7235Z"
+                                    />
+                                </svg>
+                    
+                                <span class="sr-only">Dashbaord home</span>
+                            </a>
+                    
+                            <!-- Toggle button -->
+                    
+                    <button  @click="toggle()" x-show="isOpen || isHovered" type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                    <span class="sr-only">Toggle sidebar</span>
+                    
+                    
+                    
+                    <!-- menu-fold-right icon -->
+                    <svg
+                    x-show="!isOpen"
+                    aria-hidden="true"
+                    class="hidden h-6 w-6 lg:block"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                    d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
+                    stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
+                    />
+                    </svg>
+                    
+                    <!-- menu-fold-left icon -->
+                    <svg
+                    x-show="isOpen"
+                    aria-hidden="true"
+                    class="hidden h-6 w-6 lg:block"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                    d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
                     stroke-width="2"
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                  ></path>
-                </svg>
-                <!-- Sun icon -->
-                <svg
-                  x-show="isDarkMode"
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
+                    />
+                    </svg>
+                    
+                    <!-- x icon -->
+                    <span class="iconify h-6 w-6 tabler--x lg:hidden"></span>
+                    
+                    
+                    </button>
+                        </div>
+                    
+                        <!-- Sidebar content -->
+                        <nav x-perfect-scroll aria-label="main" class="relative flex flex-1 flex-col gap-4 px-3">
+                            <!-- Link -->
+                            <!-- base classes: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+                            <!-- active classes: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+                            <!-- inactive classes: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+                            <a
+                                href="/kui-dashboard-html/"
+                                class="flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden  text-white bg-primary shadow-lg hover:bg-primary-dark  "
+                            >
+                                <!-- Icon -->
+                                <span class="iconify tabler--dashboard flex-shrink-0 w-6 h-6"></span>
+                    
+                                <!-- Link title -->
+                                <span class="text-base font-medium" x-show="isOpen || isHovered">
+                                    Dashboard
+                                </span>
+                            </a>
+                            <!-- Base: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+                            <!-- Active: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+                            <!-- Inactive: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+                            <div class="relative" x-data="{ open:  false  }">
+                                <button
+                                    type="button"
+                                    class="flex-shrink-0 flex items-center gap-2 w-full p-2 transition-colors rounded-md overflow-hidden  text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 "
+                                    @click="open = !open"
+                                >
+                                    <span class="iconify tabler--file flex-shrink-0 w-6 h-6" aria-hidden="true"></span>
+                    
+                                    <span class="whitespace-nowrap text-base font-medium" x-show="isOpen || isHovered">
+                                        Pages
+                                    </span>
+                    
+                                    <span x-show="isOpen || isHovered" aria-hidden="true" class="relative ms-auto block h-6 w-6">
+                                        <span
+                                            :class="open ? '-rotate-45' : 'rotate-45'"
+                                            class="absolute right-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                                        ></span>
+                    
+                                        <span
+                                            :class="open ? 'rotate-45' : '-rotate-45'"
+                                            class="absolute left-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                                        ></span>
+                                    </span>
+                                </button>
+                    
+                                <!-- Sublinks -->
+                                <!-- Base: transition-colors hover:text-gray-900 dark:hover:text-gray-100 -->
+                                <!-- Active: text-gray-900 dark:text-gray-200 -->
+                                <!-- Inactive: text-gray-500 dark:text-gray-400 -->
+                                <div x-cloak x-show="open && (isOpen || isHovered)" x-collapse>
+                                    <ul
+                                        class="relative ml-5 px-0 pb-0 pt-2 before:absolute before:inset-y-0 before:left-0 before:block before:w-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
+                                    >
+                                        <li
+                                            class="relative m-0 ps-6 leading-8 before:absolute before:left-0 before:top-4 before:-mt-0.5 before:block before:h-0 before:w-4 before:border-t-2 before:border-t-gray-200 last:before:bottom-0 last:before:top-4 last:before:h-auto last:before:bg-white dark:before:border-t-gray-600 dark:last:before:bg-dark-eval-1"
+                                        >
+                                            <a
+                                                href="/kui-dashboard-html/pages/blank.html"
+                                                class="transition-colors hover:text-gray-900 dark:hover:text-gray-100  text-gray-500 dark:text-gray-400 "
+                                            >
+                                                Blank
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Base: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+                            <!-- Active: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+                            <!-- Inactive: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+                            <div class="relative" x-data="{ open:  false  }">
+                                <button
+                                    type="button"
+                                    class="flex-shrink-0 flex items-center gap-2 w-full p-2 transition-colors rounded-md overflow-hidden  text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 "
+                                    @click="open = !open"
+                                >
+                                    <span class="iconify tabler--grid flex-shrink-0 w-6 h-6" aria-hidden="true"></span>
+                    
+                                    <span class="whitespace-nowrap text-base font-medium" x-show="isOpen || isHovered">
+                                        Components
+                                    </span>
+                    
+                                    <span x-show="isOpen || isHovered" aria-hidden="true" class="relative ms-auto block h-6 w-6">
+                                        <span
+                                            :class="open ? '-rotate-45' : 'rotate-45'"
+                                            class="absolute right-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                                        ></span>
+                    
+                                        <span
+                                            :class="open ? 'rotate-45' : '-rotate-45'"
+                                            class="absolute left-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                                        ></span>
+                                    </span>
+                                </button>
+                    
+                                <!-- Sublinks -->
+                                <!-- Base: transition-colors hover:text-gray-900 dark:hover:text-gray-100 -->
+                                <!-- Active: text-gray-900 dark:text-gray-200 -->
+                                <!-- Inactive: text-gray-500 dark:text-gray-400 -->
+                                <div x-cloak x-show="open && (isOpen || isHovered)" x-collapse>
+                                    <ul
+                                        class="relative ml-5 px-0 pb-0 pt-2 before:absolute before:inset-y-0 before:left-0 before:block before:w-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
+                                    >
+                                        <li
+                                            class="relative m-0 ps-6 leading-8 before:absolute before:left-0 before:top-4 before:-mt-0.5 before:block before:h-0 before:w-4 before:border-t-2 before:border-t-gray-200 last:before:bottom-0 last:before:top-4 last:before:h-auto last:before:bg-white dark:before:border-t-gray-600 dark:last:before:bg-dark-eval-1"
+                                        >
+                                            <a
+                                                href="/kui-dashboard-html/components/buttons.html"
+                                                class="transition-colors hover:text-gray-900 dark:hover:text-gray-100  text-gray-500 dark:text-gray-400 "
+                                            >
+                                                Buttons
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Base: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+                            <!-- Active: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+                            <!-- Inactive: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+                            <div class="relative" x-data="{ open:  false  }">
+                                <button
+                                    type="button"
+                                    class="flex-shrink-0 flex items-center gap-2 w-full p-2 transition-colors rounded-md overflow-hidden  text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 "
+                                    @click="open = !open"
+                                >
+                                    <span class="iconify tabler--shield flex-shrink-0 w-6 h-6" aria-hidden="true"></span>
+                    
+                                    <span class="whitespace-nowrap text-base font-medium" x-show="isOpen || isHovered">
+                                        Authentication
+                                    </span>
+                    
+                                    <span x-show="isOpen || isHovered" aria-hidden="true" class="relative ms-auto block h-6 w-6">
+                                        <span
+                                            :class="open ? '-rotate-45' : 'rotate-45'"
+                                            class="absolute right-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                                        ></span>
+                    
+                                        <span
+                                            :class="open ? 'rotate-45' : '-rotate-45'"
+                                            class="absolute left-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                                        ></span>
+                                    </span>
+                                </button>
+                    
+                                <!-- Sublinks -->
+                                <!-- Base: transition-colors hover:text-gray-900 dark:hover:text-gray-100 -->
+                                <!-- Active: text-gray-900 dark:text-gray-200 -->
+                                <!-- Inactive: text-gray-500 dark:text-gray-400 -->
+                                <div x-cloak x-show="open && (isOpen || isHovered)" x-collapse>
+                                    <ul
+                                        class="relative ml-5 px-0 pb-0 pt-2 before:absolute before:inset-y-0 before:left-0 before:block before:w-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
+                                    >
+                                        <li
+                                            class="relative m-0 ps-6 leading-8 before:absolute before:left-0 before:top-4 before:-mt-0.5 before:block before:h-0 before:w-4 before:border-t-2 before:border-t-gray-200 last:before:bottom-0 last:before:top-4 last:before:h-auto last:before:bg-white dark:before:border-t-gray-600 dark:last:before:bg-dark-eval-1"
+                                        >
+                                            <a
+                                                href="/kui-dashboard-html/auth/login.html"
+                                                class="transition-colors hover:text-gray-900 dark:hover:text-gray-100  text-gray-500 dark:text-gray-400 "
+                                            >
+                                                Login
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="relative m-0 ps-6 leading-8 before:absolute before:left-0 before:top-4 before:-mt-0.5 before:block before:h-0 before:w-4 before:border-t-2 before:border-t-gray-200 last:before:bottom-0 last:before:top-4 last:before:h-auto last:before:bg-white dark:before:border-t-gray-600 dark:last:before:bg-dark-eval-1"
+                                        >
+                                            <a
+                                                href="/kui-dashboard-html/auth/register.html"
+                                                class="transition-colors hover:text-gray-900 dark:hover:text-gray-100  text-gray-500 dark:text-gray-400 "
+                                            >
+                                                Register
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    
+                        <!-- Sidebar footer -->
+                        <div class="flex-shrink-0 px-3 lg:hidden">
+                    
+                    <button  @click="toggle()" x-show="!isOpen" type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                    <span class="sr-only">Toggle sidebar</span>
+                    
+                    
+                    
+                    <!-- menu-fold-right icon -->
+                    <svg
+                    x-show="!isOpen"
+                    aria-hidden="true"
+                    class="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                    d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
                     stroke-width="2"
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                  ></path>
-                </svg>
-              </button>
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    />
+                    </svg>
+                    
+                    <!-- menu-fold-left icon -->
+                    <svg
+                    x-show="isOpen"
+                    aria-hidden="true"
+                    class="h-6 w-6"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                    <path
+                    d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    />
+                    </svg>
+                    
+                    
+                    </button>
+                        </div>
+                    </aside>
+        
+                        <div
+                            class="flex-1 flex flex-col min-h-screen transition-[margin] duration-150 md:ms-16 lg:ms-64"
+                            :class="{
+                                'lg:ms-64': $store.sidebar.isOpen,
+                            }"
+                        >
+        
+                        <!-- Navbar -->
+                        <nav
+                            aria-label="secondary"
+                            class="sticky top-0 z-10 flex items-center justify-between bg-white px-6 py-2 transition-transform duration-500 dark:bg-dark-eval-1"
+                            :class="{
+                                '-translate-y-full': scrollingDown,
+                                'translate-y-0 shadow-lg': scrollingUp,
+                            }"
+                        >
+                            <div class="flex items-center gap-2">
+                                <!-- Quick actions menu -->
+                                <div x-dropdown>
+                        
+                        <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                        <span class="sr-only">Quick actions</span>
+                        <span aria-hidden="true" class="iconify tabler--sparkles w-6 h-6 " ></span>
+                        
+                        
+                        
+                        
+                        </button>
+                        
+                                    <div x-cloak x-dropdown:menu.bottom-start class="z-50 w-48 rounded-md shadow-lg">
+                                        <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                            <a
+                                                href="#"
+                                                class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                            >
+                                                <span aria-hidden="true" class="iconify h-4 w-4 tabler--users"></span>
+                                                <span class="text-sm leading-5">Manage users</span>
+                                            </a>
+                        
+                                            <a
+                                                href="#"
+                                                class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                            >
+                                                <span aria-hidden="true" class="iconify h-4 w-4 tabler--settings"></span>
+                                                <span class="text-sm leading-5">Site settings</span>
+                                            </a>
+                        
+                                            <a
+                                                href="#"
+                                                class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                            >
+                                                <span aria-hidden="true" class="iconify h-4 w-4 tabler--circle"></span>
+                                                <span class="text-sm leading-5">Action 3</span>
+                                            </a>
+                        
+                                            <a
+                                                href="#"
+                                                class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                            >
+                                                <span aria-hidden="true" class="iconify h-4 w-4 tabler--circle"></span>
+                                                <span class="text-sm leading-5">Action 4</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <!-- Search button -->
+                        
+                        <button   type="button" class="items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2 hidden md:inline-flex">
+                        <span class="sr-only">Search</span>
+                        <span aria-hidden="true" class="iconify tabler--search w-6 h-6 " ></span>
+                        
+                        
+                        
+                        
+                        </button>
+                            </div>
+                        
+                            <div class="flex items-center gap-2">
+                                <!-- Settings button -->
+                        
+                        <button   type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                        <span class="sr-only">Settings</span>
+                        <span aria-hidden="true" class="iconify tabler--settings w-6 h-6 " ></span>
+                        
+                        
+                        
+                        
+                        </button>
+                        
+                                <!-- Notifications button -->
+                        
+                        <button   type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                        <span class="sr-only">Notifications</span>
+                        <span aria-hidden="true" class="iconify tabler--bell w-6 h-6 " ></span>
+                        
+                        
+                        
+                        
+                        </button>
+                        
+                                <!-- Dark mode button -->
+                        
+                        <button  @click="$store.darkMode.toggle()" type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                        <span class="sr-only">Toggle dark mode</span>
+                        
+                        
+                        
+                        <!-- Moon icon -->
+                        <span x-show="!$store.darkMode.value" class="iconify h-6 w-6 tabler--moon"></span>
+                        
+                        <!-- Sun icon -->
+                        <span x-show="$store.darkMode.value" class="iconify h-6 w-6 tabler--sun"></span>
+                        
+                        
+                        </button>
+                        
+                                <!-- User dropdown menu -->
+                                <div x-dropdown>
+                        
+                        <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-0 overflow-hidden">
+                        <span class="sr-only">User menu</span>
+                        
+                        
+                        
+                        <img class="h-10 w-10 rounded-md object-cover" src="/kui-dashboard-html/images/avatar.jpeg" alt="User Name" />
+                        
+                        
+                        </button>
+                        
+                                    <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                        <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                            <a
+                                                href="#"
+                                                class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                            >
+                                                Profile
+                                            </a>
+                        
+                                            <a
+                                                href="#"
+                                                class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                            >
+                                                Logout
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                        
+                        <!-- Mobile nav -->
+                        <div
+                            class="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between bg-white px-4 py-4 transition-transform duration-500 dark:bg-dark-eval-1 sm:px-6 md:hidden"
+                            :class="{
+                                'translate-y-full': scrollingDown,
+                                'translate-y-0 shadow-t-lg': scrollingUp,
+                            }"
+                        >
+                            <!-- Search button -->
+                        
+                        <button   type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                        <span class="sr-only">Search</span>
+                        <span aria-hidden="true" class="iconify tabler--search w-6 h-6 " ></span>
+                        
+                        
+                        
+                        
+                        </button>
+                        
+                            <!-- Logo -->
+                            <a href="/kui-dashboard-html/">
+                                <span class="sr-only">K UI dashboard</span>
+                        
+                                <svg
+                                    aria-hidden="true"
+                                    class=" h-auto w-10 "
+                                    viewBox="0 0 40 40"
+                                    fill=" #A855F7 "
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
+                                    <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
+                                    <path
+                                        d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
+                                    />
+                                    <path
+                                        d="M16.9124 7.7235L20 7.10598L22.47 7.7235L20.9263 9.26727C20.9263 9.26727 20.7204 27.4839 20.9263 28.1014C21.1321 28.7189 21.729 30.0774 22.47 30.5714C23.3963 31.1889 27.9489 31.2883 29.1729 28.8823C29.556 28.1293 29.5872 27.9014 29.7171 26.9514C29.7393 26.7894 29.7643 26.6064 29.7945 26.3962C29.8955 25.6912 29.8895 24.8909 29.8832 24.0704C29.8817 23.8711 29.8802 23.6706 29.8802 23.47V12.3548L28.0277 9.57603V9.26727L38.8341 11.4286V12.3548L37.2903 12.9723V26.8664L38.8341 28.1014L34.2028 29.3725L35.4378 27.4839V12.9723L33.2765 11.4286L31.424 12.9723L31.1152 25.0138C31.1152 25.8618 31.017 27.1791 30.7193 28.3251C30.6106 28.7435 30.1101 29.5467 30.1101 29.5467C30.1101 29.5467 29.6731 30.2533 29.2627 30.5714C28.8853 30.8639 28.1871 31.1541 28.1871 31.1541C28.1871 31.1541 26.0347 32.0258 24.0721 32.4043C23.08 32.5957 22.1571 32.4413 21.5645 32.2043C21.541 32.1912 21.5168 32.1778 21.492 32.1641C20.9896 31.8865 20.243 31.4739 19.6681 30.5714C19.1558 29.767 18.765 28.7318 18.765 27.4839V9.57603L16.9124 7.7235Z"
+                                    />
+                                </svg>
+                            </a>
+                        
+                            <!-- Sidebar button -->
+                        
+                        <button  @click="$store.sidebar.open()" type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-2">
+                        <span class="sr-only">Toggle sidebar</span>
+                        <span aria-hidden="true" class="iconify tabler--menu w-6 h-6 " ></span>
+                        
+                        
+                        
+                        
+                        </button>
+                        </div>
+        
+                        <div class="container mx-auto flex-1 flex flex-col items-center gap-4 sm:gap-6 p-4 sm:p-6">
+                            <div class="flex-shrink-0 w-full flex flex-col gap-2">
+                                    <!-- Breadcrumb -->
+                                    <nav class="flex" aria-label="Breadcrumb">
+                                        <ol class="inline-flex items-center gap-x-1 md:gap-x-2">
+                                                <li class="inline-flex items-center gap-2"  aria-current="page" >
+                                                        <span
+                                                            class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400"
+                                                        >
+                                                                <span class="iconify tabler--home-filled w-4 h-4"></span>
+        
+                                                            <span>Dashboard</span>
+                                                        </span>
+                                                </li>
+                                        </ol>
+                                    </nav>
+        
+                                <!-- Page header-->
+                                <header>
+                                    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                                        <h2 class="text-xl font-semibold leading-tight">
+                                            Dashboard
+                                        </h2>
+                                        
+                                        <a
+                                            href="https://github.com/kamona-ui/kui-dashboard-html"
+                                            aria-disabled="false"
+                                            class="inline-flex select-none items-center justify-center gap-2 rounded-md bg-black px-4 py-2 text-base font-medium text-gray-300 transition-colors hover:bg-gray-800 hover:text-white focus:outline-none focus:ring focus:ring-black focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-dark-eval-3 dark:focus:ring-offset-dark-eval-2"
+                                            target="_blank"
+                                        >
+                                            <span aria-hidden="true" class="iconify h-6 w-6 tabler--brand-github"></span>
+                                        
+                                            <span>Star on Github</span>
+                                        </a>
+                                    </div>
+                                </header>
+                            </div>
+        
+                            <div class="flex items-start gap-2 w-full rounded-lg border border-transparent bg-yellow-500 p-4 text-white">
+                                <span aria-hidden="true" class="iconify tabler--alert-triangle w-6 h-6"></span>
+        
+                                <div>
+                                    <h5 class="mb-1 font-medium leading-none tracking-tight">Alert</h5>
+                                    <div class="">This template is not finished yet.</div>
+                                </div>
+                            </div>
+                            <!-- Content -->
+                            <main class="flex-1 w-full">
+                                
+                                
+                                
+                                
+                                
+                                <h1 class="sr-only">Home page</h1>
+                                
+                                <div class="grid gap-4">
+                                    <!--Quick statistics  -->
+                                    <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                                        <h2 class="sr-only">Quick statistics</h2>
+                                
+                                
+                                            <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 p-4" >
+                                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-6">
+                                        <span class="iconify tabler--users-group w-8 h-8 text-primary"></span>
+                                
+                                        <div class="flex items-center gap-2">
+                                            <span class="iconify h-5 w-5 text-green-500 tabler--trending-up"></span>
+                                            <span class="text-xs font-medium text-green-500">32.40%</span>
+                                        </div>
+                                    </div>
+                                
+                                    <div x-dropdown>
+                                    
+                                    <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                    <span class="sr-only">Card Actions</span>
+                                    <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                    
+                                    
+                                    
+                                    
+                                    </button>
+                                    
+                                        <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                            <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 1
+                                                </a>
+                                    
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 2
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="relative mt-2 grid grid-cols-2">
+                                    <div>
+                                        <h4 class="text-3xl font-semibold">12.4k</h4>
+                                        <p class="text-base font-medium text-gray-500 dark:text-gray-400">
+                                            Customers
+                                        </p>
+                                    </div>
+                                
+                                            <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, 'Customers')" class="max-h-16">
+                                                <div x-ref="quickStatisticsChartEl"></div>
+                                            </div>
+                                </div>
+                                
+                                            </div>
+                                        
+                                            <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 p-4" >
+                                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-6">
+                                        <span class="iconify tabler--eye w-8 h-8 text-primary"></span>
+                                
+                                        <div class="flex items-center gap-2">
+                                            <span class="iconify h-5 w-5 text-red-500 tabler--trending-down"></span>
+                                            <span class="text-xs font-medium text-red-500">-2.10%%</span>
+                                        </div>
+                                    </div>
+                                
+                                    <div x-dropdown>
+                                    
+                                    <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                    <span class="sr-only">Card Actions</span>
+                                    <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                    
+                                    
+                                    
+                                    
+                                    </button>
+                                    
+                                        <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                            <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 1
+                                                </a>
+                                    
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 2
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="relative mt-2 grid grid-cols-2">
+                                    <div>
+                                        <h4 class="text-3xl font-semibold">-2.6k</h4>
+                                        <p class="text-base font-medium text-gray-500 dark:text-gray-400">
+                                            Visits
+                                        </p>
+                                    </div>
+                                
+                                            <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, 'Visits')" class="max-h-16">
+                                                <div x-ref="quickStatisticsChartEl"></div>
+                                            </div>
+                                </div>
+                                
+                                            </div>
+                                        
+                                            <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 p-4" >
+                                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-6">
+                                        <span class="iconify tabler--shopping-cart w-8 h-8 text-primary"></span>
+                                
+                                        <div class="flex items-center gap-2">
+                                            <span class="iconify h-5 w-5 text-yellow-500 tabler--minus"></span>
+                                            <span class="text-xs font-medium text-yellow-500">0.60%</span>
+                                                    </div>
+                                    </div>
+                                
+                                    <div x-dropdown>
+                                    
+                                    <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                    <span class="sr-only">Card Actions</span>
+                                    <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                    
+                                    
+                                    
+                                    
+                                    </button>
+                                    
+                                        <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                            <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 1
+                                                </a>
+                                    
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 2
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="relative mt-2 grid grid-cols-2">
+                                    <div>
+                                        <h4 class="text-3xl font-semibold">34.4k</h4>
+                                        <p class="text-base font-medium text-gray-500 dark:text-gray-400">
+                                            Orders
+                                        </p>
+                                    </div>
+                                
+                                            <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, 'Orders')" class="max-h-16">
+                                                <div x-ref="quickStatisticsChartEl"></div>
+                                            </div>
+                                </div>
+                                
+                                            </div>
+                                        
+                                            <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 p-4" >
+                                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-6">
+                                        <span class="iconify tabler--chart-pie w-8 h-8 text-primary"></span>
+                                
+                                        <div class="flex items-center gap-2">
+                                            <span class="iconify h-5 w-5 text-green-500 tabler--trending-up"></span>
+                                            <span class="text-xs font-medium text-green-500">7.20%</span>
+                                        </div>
+                                    </div>
+                                
+                                    <div x-dropdown>
+                                    
+                                    <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                    <span class="sr-only">Card Actions</span>
+                                    <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                    
+                                    
+                                    
+                                    
+                                    </button>
+                                    
+                                        <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                            <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 1
+                                                </a>
+                                    
+                                                <a
+                                                    href="#"
+                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                >
+                                                    Action 2
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="relative mt-2 grid grid-cols-2">
+                                    <div>
+                                        <h4 class="text-3xl font-semibold">15.6%</h4>
+                                        <p class="text-base font-medium text-gray-500 dark:text-gray-400">
+                                            Growth
+                                        </p>
+                                    </div>
+                                
+                                            <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, 'Growth')" class="max-h-16">
+                                                <div x-ref="quickStatisticsChartEl"></div>
+                                            </div>
+                                </div>
+                                
+                                            </div>
+                                            </section>
+                                
+                                    <!-- Simple statistics -->
+                                    <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                                        <h2 class="sr-only">Simple statistics</h2>
+                                
+                                        <div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                                            <div class="flex items-center gap-4">
+                                                <div class="p-2 flex-shrink-0 flex items-center justify-center rounded-md bg-primary">
+                                                    <span class="iconify tabler--bell-dollar text-white w-6 h-6"></span>
+                                                </div>
+                                        
+                                                <div class="flex-1">
+                                                    <h4 class="text-xl font-medium">132 Sales</h4>
+                                        
+                                                    <p class="text-sm font-medium text-gray-500">12 Waiting payments</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                                            <div class="flex items-center gap-4">
+                                                <div class="p-2 flex-shrink-0 flex items-center justify-center rounded-md bg-green-500">
+                                                    <span class="iconify tabler--shopping-bag text-white w-6 h-6"></span>
+                                                </div>
+                                        
+                                                <div class="flex-1">
+                                                    <h4 class="text-xl font-medium">78 Orders</h4>
+                                        
+                                                    <p class="text-sm font-medium text-gray-500">32 Shiped</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                                            <div class="flex items-center gap-4">
+                                                <div class="p-2 flex-shrink-0 flex items-center justify-center rounded-md bg-blue-500">
+                                                    <span class="iconify tabler--brand-twitter text-white w-6 h-6"></span>
+                                                </div>
+                                        
+                                                <div class="flex-1">
+                                                    <h4 class="text-xl font-medium">60 Share</h4>
+                                        
+                                                    <p class="text-sm font-medium text-gray-500">16 Today</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                                            <div class="flex items-center gap-4">
+                                                <div class="p-2 flex-shrink-0 flex items-center justify-center rounded-md bg-blue-400">
+                                                    <span class="iconify tabler--brand-facebook text-white w-6 h-6"></span>
+                                                </div>
+                                        
+                                                <div class="flex-1">
+                                                    <h4 class="text-xl font-medium">231 Likes</h4>
+                                        
+                                                    <p class="text-sm font-medium text-gray-500">23 Today</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                
+                                    <!-- Sales charts -->
+                                    <section>
+                                        <h2 class="sr-only">Sales charts</h2>
+                                
+                                        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
+                                                <div class="grid grid-cols-2 gap-4">
+                                                    <div class="rounded-md bg-purple-500 p-4 shadow-md">
+                                                        <div class="grid grid-cols-1 gap-4 p-2">
+                                                            <span aria-hidden="true" class="iconify h-10 w-10 text-white tabler--user-plus"></span>
+                                
+                                                            <div class="grid gap-2">
+                                                                <p class="text-base font-medium text-green-300">+1%</p>
+                                                                <p class="text-3xl font-medium text-white">1,210</p>
+                                                            </div>
+                                                            <p class="text-sm font-medium text-white">Today's Users</p>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="rounded-md bg-cyan-500 p-4 shadow-md">
+                                                        <div class="grid grid-cols-1 gap-4 p-2">
+                                                            <span
+                                                                aria-hidden="true"
+                                                                class="iconify h-10 w-10 text-white tabler--chart-bar-popular"
+                                                            ></span>
+                                                            <div class="grid gap-2">
+                                                                <p class="text-base font-medium text-green-300">+4%</p>
+                                                                <p class="text-3xl font-medium text-white">20,350</p>
+                                                            </div>
+                                                            <p class="text-sm font-medium text-white">Today's Sales</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="grid grid-cols-2 rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                                                    <div class="grid grid-cols-1 gap-4">
+                                                        <h4 class="text-2xl font-medium">Earning</h4>
+                                                        <p class="text-lg font-medium text-gray-500">This Month</p>
+                                                        <p class="text-base font-medium text-green-400">+20.5%</p>
+                                                        <p class="text-2xl font-medium text-gray-600">$5070.80</p>
+                                                    </div>
+                                
+                                                    <div
+                                                        x-data="earningChart($refs.earningChartEl)"
+                                                        class="flex h-full w-full items-center justify-center overflow-hidden"
+                                                    >
+                                                        <div x-ref="earningChartEl"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                                            <div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                                                <div class="flex items-center justify-between">
+                                                    <h4 class="text-lg font-medium">Salas Analytics</h4>
+                                
+                                                    <div x-dropdown>
+                                                        <button
+                                                            type="button"
+                                                            class="inline-flex select-none items-center rounded-md bg-white p-1.5 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
+                                                            x-dropdown:trigger
+                                                        >
+                                                            <span class="sr-only">Card Actions</span>
+                                
+                                                            <span class="iconify h-5 w-5 tabler--dots"></span>
+                                                        </button>
+                                
+                                                        <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                                            <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                                <a
+                                                                    href="#"
+                                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                                >
+                                                                    Action 1
+                                                                </a>
+                                
+                                                                <a
+                                                                    href="#"
+                                                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                                >
+                                                                    Action 2
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div x-data="salesChart($refs.salesChartEl)" class="h-full w-full overflow-hidden">
+                                                    <div x-ref="salesChartEl"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                
+                                    <!-- Usage charts -->
+                                    <section class="grid gap-4 grid-cols-1 md:grid-cols-3">
+                                        <h2 class="sr-only">Usage charts</h2>
+                                
+                                        
+                                                    <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 overflow-hidden" >
+                                                        <div class="flex items-center justify-between p-4">
+                                            <h4 class="font-medium">Memory Usage</h4>
+                                        
+                                            <div x-dropdown>
+                                            
+                                            <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                            <span class="sr-only">Card Actions</span>
+                                            <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                            
+                                            
+                                            
+                                            
+                                            </button>
+                                            
+                                                <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                                    <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                        <a
+                                                            href="#"
+                                                            class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                        >
+                                                            Action 1
+                                                        </a>
+                                            
+                                                        <a
+                                                            href="#"
+                                                            class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                        >
+                                                            Action 2
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center gap-1 px-4 py-2 opacity-70">
+                                            <span class="iconify tabler--circle"></span>
+                                            <span class="text-sm"></span>
+                                        </div>
+                                        
+                                        <div class="mt-2 h-24 rounded-b-md" x-data="usageChart($refs.usageChartEl, '')">
+                                            <div x-ref="usageChartEl"></div>
+                                        </div>
+                                        
+                                                    </div>
+                                                        
+                                                    <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 overflow-hidden" >
+                                                        <div class="flex items-center justify-between p-4">
+                                            <h4 class="font-medium">Disk Usage</h4>
+                                        
+                                            <div x-dropdown>
+                                            
+                                            <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                            <span class="sr-only">Card Actions</span>
+                                            <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                            
+                                            
+                                            
+                                            
+                                            </button>
+                                            
+                                                <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                                    <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                        <a
+                                                            href="#"
+                                                            class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                        >
+                                                            Action 1
+                                                        </a>
+                                            
+                                                        <a
+                                                            href="#"
+                                                            class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                        >
+                                                            Action 2
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center gap-1 px-4 py-2 opacity-70">
+                                            <span class="iconify tabler--circle"></span>
+                                            <span class="text-sm"></span>
+                                        </div>
+                                        
+                                        <div class="mt-2 h-24 rounded-b-md" x-data="usageChart($refs.usageChartEl, '')">
+                                            <div x-ref="usageChartEl"></div>
+                                        </div>
+                                        
+                                                    </div>
+                                                        
+                                                    <div class="rounded-md bg-white shadow-md dark:bg-dark-eval-1 overflow-hidden" >
+                                                        <div class="flex items-center justify-between p-4">
+                                            <h4 class="font-medium">CPU Usage</h4>
+                                        
+                                            <div x-dropdown>
+                                            
+                                            <button  x-dropdown:trigger type="button" class="inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 bg-transparent text-gray-500 hover:text-gray-600 focus:ring-primary dark:text-gray-300 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-eval-2 p-1.5">
+                                            <span class="sr-only">Card Actions</span>
+                                            <span aria-hidden="true" class="iconify tabler--dots w-5 h-5 " ></span>
+                                            
+                                            
+                                            
+                                            
+                                            </button>
+                                            
+                                                <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                                                    <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                                        <a
+                                                            href="#"
+                                                            class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                        >
+                                                            Action 1
+                                                        </a>
+                                            
+                                                        <a
+                                                            href="#"
+                                                            class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                                        >
+                                                            Action 2
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-center gap-1 px-4 py-2 opacity-70">
+                                            <span class="iconify tabler--circle"></span>
+                                            <span class="text-sm"></span>
+                                        </div>
+                                        
+                                        <div class="mt-2 h-24 rounded-b-md" x-data="usageChart($refs.usageChartEl, '')">
+                                            <div x-ref="usageChartEl"></div>
+                                        </div>
+                                        
+                                                    </div>
+                                                    </section>
+                                
+                                    <!-- Customers table -->
+                                    <section class="overflow-hidden bg-white shadow-md rounded-md dark:bg-dark-eval-1">
+                                        <div class="p-4">
+                                            <h2 class="text-xl font-semibold">Latest Customers</h2>
+                                        </div>
+                                
+                                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                                <div
+                                                    class="overflow-hidden border-b border-gray-200 rounded-md dark:border-gray-700"
+                                                >
+                                                    <table
+                                                        class="min-w-full overflow-x-scroll divide-y divide-gray-200 dark:divide-gray-700"
+                                                    >
+                                                        <thead class="bg-gray-50 dark:bg-dark-eval-2">
+                                                            <tr>
+                                                                <th
+                                                                    scope="col"
+                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                                                >
+                                                                    Name
+                                                                </th>
+                                                                <th
+                                                                    scope="col"
+                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                                                >
+                                                                    Title
+                                                                </th>
+                                                                <th
+                                                                    scope="col"
+                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                                                >
+                                                                    Country
+                                                                </th>
+                                                                <th
+                                                                    scope="col"
+                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                                                >
+                                                                    Date
+                                                                </th>
+                                                                <th scope="col" class="relative px-6 py-3">
+                                                                    <span class="sr-only">Edit</span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                
+                                                        <tbody
+                                                            class="bg-white divide-y divide-gray-200 dark:bg-dark-eval-1 dark:divide-gray-700"
+                                                        >
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Mamie Wiza
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Clovis88&#64;hotmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Egypt
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Wayne Hoppe I
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Angus80&#64;hotmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        China
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Bertha Parker
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Kailee.Ortiz31&#64;hotmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Brazil
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Clara Mills
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Marco31&#64;yahoo.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Argentina
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Carroll Stracke
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Felicia_Mraz&#64;gmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Indonesia
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Glenda Stroman
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Shanna_Gutkowski&#64;yahoo.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Lebanon
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Hannah Berge
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Dakota.Johnston52&#64;hotmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Portugal
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Roy Runolfsson
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Eduardo60&#64;gmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Indonesia
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Roberto Collier
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Deangelo.Reichert&#64;hotmail.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Kenya
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr
+                                                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                                >
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="flex items-center gap-4">
+                                                                            <div class="flex-shrink-0 w-10 h-10">
+                                                                                <img
+                                                                                    class="w-10 h-10 rounded-md"
+                                                                                    src="/kui-dashboard-html/images/1.png"
+                                                                                    alt="Customer's image"
+                                                                                />
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="text-sm font-medium">
+                                                                                    Pat Fisher
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                                                >
+                                                                                    Joshuah38&#64;yahoo.com
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <div class="text-sm">
+                                                                            Regional Paradigm Technician
+                                                                        </div>
+                                                                        <div
+                                                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                                                        >
+                                                                            Optimization
+                                                                        </div>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Nigeria
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                                                    >
+                                                                        Jan 13 2025
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                                                    >
+                                                                        <a
+                                                                            href="#"
+                                                                            class="text-indigo-600 hover:text-indigo-900"
+                                                                        >
+                                                                            Edit
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                
+                                
+                                
+                                
+                                
+                            </main>
+        
+                            <!-- Footer -->
+                            <footer class="flex w-full flex-shrink-0 flex-col items-center gap-2 lg:flex-row lg:justify-between">
+                                <div x-data class="text-sm text-gray-500 dark:text-gray-400">
+                                    ©<span x-text="new Date().getFullYear()"></span>
+                                    K UI, All rights reserved
+                                </div>
+                            
+                                <div class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+                                    <span>Hand-crafted &amp; Made with </span>
+                            
+                                    <div class="inline-flex">
+                                        <span class="sr-only">love</span>
+                                        <span aria-hidden="true" class="iconify h-5 w-5 text-red-500 tabler--heart-filled"></span>
+                                    </div>
+                            
+                                    <span>by</span>
+                            
+                                    <a href="https://github.com/Kamona-WD" target="_blank" class="text-blue-600 hover:underline"> Ahmed Kamel </a>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex items-center gap-2">
-              <!-- Dark mode button -->
-
-              <button
-                type="button"
-                class="hidden md:inline-flex inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-                @click="toggleDarkMode"
-              >
-                <span class="sr-only">Toggle dark mode</span>
-
-                <!-- Moon icon -->
-                <svg
-                  x-show="!isDarkMode"
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                  ></path>
-                </svg>
-                <!-- Sun icon -->
-                <svg
-                  x-show="isDarkMode"
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                  ></path>
-                </svg>
-              </button>
-
-              <!-- User dropdown menu -->
-              <div class="relative">
-                <button
-                  class="flex text-sm transition border-2 border-transparent rounded-md focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1"
-                >
-                  <img class="object-cover w-8 h-8 rounded-md" src="assets/images/avatar.jpg" alt="User Name" />
-                </button>
-              </div>
-            </div>
-          </nav>
-          <!-- Mobile nav -->
-          <div
-            class="fixed inset-x-0 bottom-0 z-20 flex items-center justify-between px-4 py-4 transition-transform duration-500 bg-white sm:px-6 md:hidden dark:bg-dark-eval-1"
-            :class="{
-        'translate-y-full': scrollingDown,
-        'translate-y-0': scrollingUp,
-    }"
-          >
-            <!-- Search button -->
-
-            <button
-              type="button"
-              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-            >
-              <span class="sr-only">Searrch</span>
-
-              <!-- Search icon -->
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </button>
-
-            <!-- Logo -->
-            <a href="#">
-              <span class="sr-only">K UI dashboard</span
-              ><svg
-                aria-hidden="true"
-                class="w-10 h-auto"
-                viewBox="0 0 40 40"
-                fill="#A855F7"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M20 3L40 8L39.5207 9.91704L20 5.03685L0.479258 9.91704L0 8L20 3Z" />
-                <path d="M20 37.1475L40 32.1475L39.5207 30.2304L20 35.1106L0.479258 30.2304L0 32.1475L20 37.1475Z" />
-                <path
-                  d="M1.16589 11.7373L5.17972 10.8111V18.1675L11.9723 10.1935L11.3548 8.95852L15.6774 8.03225L13.8249 9.88479V11.1198L6.7235 19.4562L15.0599 30.8802L16.6037 32.1152L15.9862 32.424L12.8986 31.1889L5.17972 21.095V28.4101L7.34101 29.9539L1.16589 28.4101L3.32718 27.4839V13.2811L1.16589 11.7373Z"
-                />
-                <path
-                  d="M16.9124 7.7235L20 7.10598L22.47 7.7235L20.9263 9.26727C20.9263 9.26727 20.7204 27.4839 20.9263 28.1014C21.1321 28.7189 21.729 30.0774 22.47 30.5714C23.3963 31.1889 27.9489 31.2883 29.1729 28.8823C29.556 28.1293 29.5872 27.9014 29.7171 26.9514C29.7393 26.7894 29.7643 26.6064 29.7945 26.3962C29.8955 25.6912 29.8895 24.8909 29.8832 24.0704C29.8817 23.8711 29.8802 23.6706 29.8802 23.47V12.3548L28.0277 9.57603V9.26727L38.8341 11.4286V12.3548L37.2903 12.9723V26.8664L38.8341 28.1014L34.2028 29.3725L35.4378 27.4839V12.9723L33.2765 11.4286L31.424 12.9723L31.1152 25.0138C31.1152 25.8618 31.017 27.1791 30.7193 28.3251C30.6106 28.7435 30.1101 29.5467 30.1101 29.5467C30.1101 29.5467 29.6731 30.2533 29.2627 30.5714C28.8853 30.8639 28.1871 31.1541 28.1871 31.1541C28.1871 31.1541 26.0347 32.0258 24.0721 32.4043C23.08 32.5957 22.1571 32.4413 21.5645 32.2043C21.541 32.1912 21.5168 32.1778 21.492 32.1641C20.9896 31.8865 20.243 31.4739 19.6681 30.5714C19.1558 29.767 18.765 28.7318 18.765 27.4839V9.57603L16.9124 7.7235Z"
-                />
-              </svg>
-            </a>
-
-            <!-- Sidebar button -->
-
-            <button
-              type="button"
-              class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-white text-gray-500 hover:bg-gray-100 focus:ring-purple-500 dark:text-gray-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 p-2 rounded-md"
-              @click="isSidebarOpen = true"
-            >
-              <span class="sr-only">Toggle sidebar</span>
-
-              <!-- Menu icon -->
-              <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Page header-->
-          <header class="p-4 sm:p-6">
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <h2 class="text-xl font-semibold leading-tight">Dashboard</h2>
-
-              <a
-                href="https://github.com/kamona-ui/kui-dashboard-html"
-                aria-disabled="false"
-                class="gap-2 justify-center inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 bg-black text-gray-300 hover:text-white hover:bg-gray-800 focus:ring-black dark:hover:bg-dark-eval-3 px-4 py-2 text-base rounded-md"
-                target="_blank"
-              >
-                <!-- Github icon -->
-                <svg
-                  class="w-6 h-6"
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M12.026 2C6.517 2 2.052 6.465 2.052 11.974C2.052 16.38 4.909 20.119 8.873 21.439C9.372 21.529 9.552 21.222 9.552 20.958C9.552 20.721 9.544 20.093 9.541 19.262C6.766 19.864 6.18 17.924 6.18 17.924C5.728 16.772 5.073 16.465 5.073 16.465C4.168 15.846 5.142 15.86 5.142 15.86C6.144 15.93 6.669 16.888 6.669 16.888C7.559 18.412 9.005 17.972 9.571 17.717C9.662 17.072 9.922 16.632 10.206 16.383C7.992 16.132 5.664 15.276 5.664 11.453C5.664 10.366 6.053 9.474 6.688 8.778C6.587 8.525 6.242 7.51 6.787 6.138C6.787 6.138 7.624 5.869 9.529 7.159C10.3426 6.93767 11.1818 6.8247 12.025 6.823C12.8682 6.82437 13.7075 6.93735 14.521 7.159C16.427 5.868 17.263 6.138 17.263 6.138C17.808 7.51 17.466 8.525 17.362 8.778C18.002 9.474 18.386 10.365 18.386 11.453C18.386 15.286 16.056 16.128 13.834 16.375C14.189 16.683 14.509 17.291 14.509 18.221C14.509 19.555 14.497 20.631 14.497 20.958C14.497 21.225 14.675 21.535 15.184 21.437C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2Z"
-                  />
-                </svg>
-                <span>Star on Github</span>
-              </a>
-            </div>
-          </header>
-
-          <!-- Content -->
-          <main class="grid flex-1 gap-6 px-4 mt-4 sm:px-6">
-            <h1 class="sr-only">Dashboard Home</h1>
-            <section>
-              <h2 class="text-2xl text-red-400 animate-pulse">Still in design phase, Will be available soon.</h2>
-            </section>
-          </main>
-
-          <!-- Footer -->
-          <footer class="w-full flex flex-col flex-shrink-0 gap-2 px-6 py-4 lg:flex-row lg:justify-between" x-data>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-              &#169; <span x-text="new Date().getFullYear()"></span> K UI, All rights reserved
-            </p>
-
-            <p class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-              <span>Hand-crafted & Made with</span>
-              <span>
-                <svg
-                  class="w-6 h-6 text-red-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </span>
-              <span>by</span>
-              <a href="https://github.com/Kamona-WD" target="_blank" class="text-blue-600 hover:underline">
-                Ahmed Kamel
-              </a>
-            </p>
-          </footer>
-        </div>
-      </div>
-    </div>
-
-    <script src="assets/js/vendor/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+    </body>
 </html>
