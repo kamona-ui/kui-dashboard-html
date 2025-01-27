@@ -1,0 +1,203 @@
+<!-- Sidebar overly -->
+<div
+    style="display: none"
+    x-show="$store.sidebar.isOpen"
+    @click="$store.sidebar.close()"
+    class="fixed inset-0 z-40 bg-black/50 duration-700 md:hidden"
+    x-transition:enter="transition duration-200 ease-in-out"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition duration-150 ease-in-out"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+></div>
+
+<!-- Sidebar -->
+<aside
+    x-sidebar
+    class="fixed inset-y-0 z-40 flex w-64 -translate-x-full flex-col gap-6 bg-white py-3 shadow-lg transition-all duration-200 dark:bg-dark-eval-1 md:transition-[width] lg:translate-x-0"
+    :class="{
+        'translate-x-0 w-64': isOpen || isHovered,
+        '-translate-x-full w-64 md:w-16 md:translate-x-0': !isOpen && !isHovered,
+    }"
+    @resize.window="handleWindowResize"
+>
+    <!-- Sidebar header -->
+    <div class="flex flex-shrink-0 items-center justify-between px-3">
+        <!-- Logo -->
+        <a href="{{ baseUrl '/' }}" class="inline-flex items-center">
+            {{> partials/logo }}
+
+            <span class="sr-only">Dashbaord home</span>
+        </a>
+
+        <!-- Toggle button -->
+        {{#btn
+            variant="transparent"
+            className="p-2"
+            srText="Toggle sidebar"
+            attrs='@click="toggle()" x-show="isOpen || isHovered"'
+        }}
+        <!-- menu-fold-right icon -->
+        <svg
+            x-show="!isOpen"
+            aria-hidden="true"
+            class="hidden h-6 w-6 lg:block"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+
+        <!-- menu-fold-left icon -->
+        <svg
+            x-show="isOpen"
+            aria-hidden="true"
+            class="hidden h-6 w-6 lg:block"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+
+        <!-- x icon -->
+        <span class="iconify h-6 w-6 tabler--x lg:hidden"></span>
+        {{/btn}}
+    </div>
+
+    <!-- Sidebar content -->
+    <nav x-perfect-scroll aria-label="main" class="relative flex flex-1 flex-col gap-4 px-3">
+        {{#each navigationLinks}}
+        {{#unless links}}
+        <!-- Link -->
+        <!-- base classes: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+        <!-- active classes: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+        <!-- inactive classes: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+        <a
+            href="{{ baseUrl url }}"
+            class="flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden {{#if (eq ../activeLink title)}} text-white bg-primary shadow-lg hover:bg-primary-dark {{else}} text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 {{/if}} "
+        >
+            <!-- Icon -->
+            <span class="iconify {{ iconName }} flex-shrink-0 w-6 h-6"></span>
+
+            <!-- Link title -->
+            <span class="text-base font-medium" x-show="isOpen || isHovered">
+                {{ title }}
+            </span>
+        </a>
+        {{else}}
+        <!-- Base: flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden -->
+        <!-- Active: text-white bg-purple-500 shadow-lg hover:bg-purple-600 -->
+        <!-- Inactive: text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 -->
+        <div class="relative" x-data="{ open: {{#if (eq ../group title)}} true {{else}} false {{/if}} }">
+            <button
+                type="button"
+                class="flex-shrink-0 flex items-center gap-2 w-full p-2 transition-colors rounded-md overflow-hidden {{#if (eq ../group title)}} text-white bg-purple-500 shadow-lg hover:bg-purple-600 {{else}} text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2 {{/if}}"
+                @click="open = !open"
+            >
+                <span class="iconify {{ iconName }} flex-shrink-0 w-6 h-6" aria-hidden="true"></span>
+
+                <span class="whitespace-nowrap text-base font-medium" x-show="isOpen || isHovered">
+                    {{ title }}
+                </span>
+
+                <span x-show="isOpen || isHovered" aria-hidden="true" class="relative ms-auto block h-6 w-6">
+                    <span
+                        :class="open ? '-rotate-45' : 'rotate-45'"
+                        class="absolute right-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                    ></span>
+
+                    <span
+                        :class="open ? 'rotate-45' : '-rotate-45'"
+                        class="absolute left-[9px] top-1/2 mt-[-5px] h-2 w-[2px] bg-gray-400 transition-all duration-200"
+                    ></span>
+                </span>
+            </button>
+
+            <!-- Sublinks -->
+            <!-- Base: transition-colors hover:text-gray-900 dark:hover:text-gray-100 -->
+            <!-- Active: text-gray-900 dark:text-gray-200 -->
+            <!-- Inactive: text-gray-500 dark:text-gray-400 -->
+            <div x-cloak x-show="open && (isOpen || isHovered)" x-collapse>
+                <ul
+                    class="relative ml-5 px-0 pb-0 pt-2 before:absolute before:inset-y-0 before:left-0 before:block before:w-0 before:border-l-2 before:border-l-gray-200 dark:before:border-l-gray-600"
+                >
+                    {{#each links}}
+                    <li
+                        class="relative m-0 ps-6 leading-8 before:absolute before:left-0 before:top-4 before:-mt-0.5 before:block before:h-0 before:w-4 before:border-t-2 before:border-t-gray-200 last:before:bottom-0 last:before:top-4 last:before:h-auto last:before:bg-white dark:before:border-t-gray-600 dark:last:before:bg-dark-eval-1"
+                    >
+                        <a
+                            href="{{ baseUrl url }}"
+                            class="transition-colors hover:text-gray-900 dark:hover:text-gray-100 {{#if (eq ../../activeLink title)}} text-gray-900 dark:text-gray-200 {{else}} text-gray-500 dark:text-gray-400 {{/if}}"
+                        >
+                            {{ title }}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        {{/unless}}
+        {{/each}}
+    </nav>
+
+    <!-- Sidebar footer -->
+    <div class="flex-shrink-0 px-3 lg:hidden">
+        {{#btn
+            variant="transparent"
+            className="p-2"
+            srText="Toggle sidebar"
+            attrs='@click="toggle()" x-show="!isOpen"'
+        }}
+        <!-- menu-fold-right icon -->
+        <svg
+            x-show="!isOpen"
+            aria-hidden="true"
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M12 6H20M12 12H20M4 18H20M4 6L8 9L4 12"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+
+        <!-- menu-fold-left icon -->
+        <svg
+            x-show="isOpen"
+            aria-hidden="true"
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M12 6H20M12 12H20M4 18H20M8 6L4 9L8 12"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+        {{/btn}}
+    </div>
+</aside>

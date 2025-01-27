@@ -1,0 +1,28 @@
+<div x-dropdown>
+    {{#btn
+        variant="transparent"
+        srText="Card Actions"
+        icon="tabler--dots"
+        iconSizeClasses="w-5 h-5"
+        className="p-1.5"
+        attrs="x-dropdown:trigger"}}
+    {{/btn}}
+
+    <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+        <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+            <a
+                href="#"
+                class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+            >
+                Action 1
+            </a>
+
+            <a
+                href="#"
+                class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+            >
+                Action 2
+            </a>
+        </div>
+    </div>
+</div>

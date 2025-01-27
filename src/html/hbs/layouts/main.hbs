@@ -1,0 +1,83 @@
+{{#> layouts/base pageTitle=pageTitle }}
+    <div x-data="globalState" :class="{ 'dark': $store.darkMode.value }">
+        <div class="min-h-screen flex text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-100">
+            {{> partials/sidebar activeLink=activeLink group=group }}
+
+                <div
+                    class="flex-1 flex flex-col min-h-screen transition-[margin] duration-150 md:ms-16 lg:ms-64"
+                    :class="{
+                        'lg:ms-64': $store.sidebar.isOpen,
+                    }"
+                >
+
+                {{> partials/navbar }}
+
+                <div class="container mx-auto flex-1 flex flex-col items-center gap-4 sm:gap-6 p-4 sm:p-6">
+                    <div class="flex-shrink-0 w-full flex flex-col gap-2">
+                        {{#if breadcrumb}}
+                            <!-- Breadcrumb -->
+                            <nav class="flex" aria-label="Breadcrumb">
+                                <ol class="inline-flex items-center gap-x-1 md:gap-x-2">
+                                    {{#each breadcrumb}}
+                                        <li class="inline-flex items-center gap-2" {{#if @last}} aria-current="page" {{/if}}>
+                                            {{#if url}}
+                                                <a
+                                                    href="{{baseUrl url}}"
+                                                    class="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+                                                >
+                                                    {{#if icon}}
+                                                        <span class="iconify {{icon}} w-4 h-4"></span>
+                                                    {{/if}}
+
+                                                    <span>{{title}}</span>
+                                                </a>
+
+                                                {{#unless @last}}
+                                                    <span
+                                                        class="iconify tabler--chevron-right w-5 h-5 text-gray-400 rtl:rotate-180"
+                                                    ></span>
+                                                {{/unless}}
+                                            {{else}}
+                                                <span
+                                                    class="inline-flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400"
+                                                >
+                                                    {{#if icon}}
+                                                        <span class="iconify {{icon}} w-4 h-4"></span>
+                                                    {{/if}}
+
+                                                    <span>{{title}}</span>
+                                                </span>
+                                            {{/if}}
+                                        </li>
+                                    {{/each}}
+                                </ol>
+                            </nav>
+                            {{/if}}
+
+                        <!-- Page header-->
+                        <header>
+                            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                                {{> header}}
+                            </div>
+                        </header>
+                    </div>
+
+                    <div class="flex items-start gap-2 w-full rounded-lg border border-transparent bg-yellow-500 p-4 text-white">
+                        <span aria-hidden="true" class="iconify tabler--alert-triangle w-6 h-6"></span>
+
+                        <div>
+                            <h5 class="mb-1 font-medium leading-none tracking-tight">Alert</h5>
+                            <div>This template is not finished yet.</div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <main class="flex-1 w-full">
+                        {{> @partial-block}} 
+                    </main>
+
+                    {{> partials/footer}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/layouts/base}}

@@ -1,0 +1,260 @@
+{{#> layouts/main activeLink='Dashboard' breadcrumb=pages.home.breadcrumb}}
+
+{{#*inline "styles"}}{{/inline}}
+{{#*inline "head-scripts"}}{{/inline}}
+
+{{#*inline "header"}}
+{{> partials/page-header title='Dashboard' }}
+{{/inline}}
+
+<h1 class="sr-only">Home page</h1>
+
+<div class="grid gap-4">
+    <!--Quick statistics  -->
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <h2 class="sr-only">Quick statistics</h2>
+
+        {{#each pages.home.charts.quickStaticsCharts}}
+        {{#> partials/quick-statistics-card icon=icon title=title total=total percentage=percentage status=status }}
+        <div x-data="quickStatisticsChart($refs.quickStatisticsChartEl, '{{ ../title }}')" class="max-h-16">
+            <div x-ref="quickStatisticsChartEl"></div>
+        </div>
+        {{/partials/quick-statistics-card}}
+        {{/each}}
+    </section>
+
+    <!-- Simple statistics -->
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <h2 class="sr-only">Simple statistics</h2>
+
+        {{#each pages.home.simpleStatistics}}
+        {{> partials/simple-statistics-card icon=icon title=title note=note color=colorClass }}
+        {{/each}}
+    </section>
+
+    <!-- Sales charts -->
+    <section>
+        <h2 class="sr-only">Sales charts</h2>
+
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="rounded-md bg-purple-500 p-4 shadow-md">
+                        <div class="grid grid-cols-1 gap-4 p-2">
+                            <span aria-hidden="true" class="iconify h-10 w-10 text-white tabler--user-plus"></span>
+
+                            <div class="grid gap-2">
+                                <p class="text-base font-medium text-green-300">+1%</p>
+                                <p class="text-3xl font-medium text-white">1,210</p>
+                            </div>
+                            <p class="text-sm font-medium text-white">Today's Users</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-md bg-cyan-500 p-4 shadow-md">
+                        <div class="grid grid-cols-1 gap-4 p-2">
+                            <span
+                                aria-hidden="true"
+                                class="iconify h-10 w-10 text-white tabler--chart-bar-popular"
+                            ></span>
+                            <div class="grid gap-2">
+                                <p class="text-base font-medium text-green-300">+4%</p>
+                                <p class="text-3xl font-medium text-white">20,350</p>
+                            </div>
+                            <p class="text-sm font-medium text-white">Today's Sales</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                    <div class="grid grid-cols-1 gap-4">
+                        <h4 class="text-2xl font-medium">Earning</h4>
+                        <p class="text-lg font-medium text-gray-500">This Month</p>
+                        <p class="text-base font-medium text-green-400">+20.5%</p>
+                        <p class="text-2xl font-medium text-gray-600">$5070.80</p>
+                    </div>
+
+                    <div
+                        x-data="earningChart($refs.earningChartEl)"
+                        class="flex h-full w-full items-center justify-center overflow-hidden"
+                    >
+                        <div x-ref="earningChartEl"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-md bg-white p-4 shadow-md dark:bg-dark-eval-1">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-lg font-medium">Salas Analytics</h4>
+
+                    <div x-dropdown>
+                        <button
+                            type="button"
+                            class="inline-flex select-none items-center rounded-md bg-white p-1.5 font-medium text-gray-500 transition-colors hover:bg-gray-100 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:bg-dark-eval-2 dark:hover:text-gray-200 dark:focus:ring-offset-dark-eval-2"
+                            x-dropdown:trigger
+                        >
+                            <span class="sr-only">Card Actions</span>
+
+                            <span class="iconify h-5 w-5 tabler--dots"></span>
+                        </button>
+
+                        <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                            <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                                <a
+                                    href="#"
+                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                >
+                                    Action 1
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                                >
+                                    Action 2
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div x-data="salesChart($refs.salesChartEl)" class="h-full w-full overflow-hidden">
+                    <div x-ref="salesChartEl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage charts -->
+    <section class="grid gap-4 grid-cols-1 md:grid-cols-3">
+        <h2 class="sr-only">Usage charts</h2>
+
+        {{#each pages.home.charts.usageCharts}}
+        {{> partials/usage-card title=title total=total }}
+        {{/each}}
+    </section>
+
+    <!-- Customers table -->
+    <section class="overflow-hidden bg-white shadow-md rounded-md dark:bg-dark-eval-1">
+        <div class="p-4">
+            <h2 class="text-xl font-semibold">Latest Customers</h2>
+        </div>
+
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div
+                    class="overflow-hidden border-b border-gray-200 rounded-md dark:border-gray-700"
+                >
+                    <table
+                        class="min-w-full overflow-x-scroll divide-y divide-gray-200 dark:divide-gray-700"
+                    >
+                        <thead class="bg-gray-50 dark:bg-dark-eval-2">
+                            <tr>
+                                <th
+                                    scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                >
+                                    Title
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                >
+                                    Country
+                                </th>
+                                <th
+                                    scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-start text-gray-500 uppercase dark:text-gray-300"
+                                >
+                                    Date
+                                </th>
+                                <th scope="col" class="relative px-6 py-3">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody
+                            class="bg-white divide-y divide-gray-200 dark:bg-dark-eval-1 dark:divide-gray-700"
+                        >
+                            {{#each pages.home.latestCustomers}}
+                                <tr
+                                    class="transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                                >
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-4">
+                                            <div class="flex-shrink-0 w-10 h-10">
+                                                <img
+                                                    class="w-10 h-10 rounded-md"
+                                                    src="/images/1.png"
+                                                    alt="Customer's image"
+                                                />
+                                            </div>
+                                            <div>
+                                                <div class="text-sm font-medium">
+                                                    {{ name }}
+                                                </div>
+                                                <div
+                                                    class="text-sm text-gray-500 dark:text-gray-400"
+                                                >
+                                                    {{{ email }}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm">
+                                            Regional Paradigm Technician
+                                        </div>
+                                        <div
+                                            class="text-sm text-gray-500 dark:text-gray-400"
+                                        >
+                                            Optimization
+                                        </div>
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                    >
+                                        {{ country }}
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+                                    >
+                                        {{ date }}
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
+                                    >
+                                        <a
+                                            href="#"
+                                            class="text-indigo-600 hover:text-indigo-900"
+                                        >
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{{#*inline "beforeScript"}}
+{{/inline}}
+
+{{#*inline "afterScript"}}{{/inline}}
+
+{{#*inline "beforeAlpineStart"}}
+<script type="module" src="{{ resolve-from-root '../js/demo.js' }}"></script>
+{{/inline}}
+
+{{/layouts/main}}

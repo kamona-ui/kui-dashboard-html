@@ -1,0 +1,23 @@
+{{#> layouts/base pageTitle=pageTitle }}
+<div x-data :class="{ 'dark': $store.darkMode.value }">
+    <div class="bg-gray-100 dark:bg-dark-eval-0">
+        <div class="container mx-auto flex min-h-screen flex-col gap-24 p-4 sm:p-6">
+            <div class="flex flex-1 flex-col items-center justify-center gap-24">
+                <div class="flex-shrink-0">
+                    <a href="{{ baseUrl '/' }}">
+                        {{> partials/logo className="h-20 w-20" }}
+
+                        <span class="sr-only">Home page</span>
+                    </a>
+                </div>
+
+                <main class="w-full sm:max-w-md">
+                    {{> @partial-block}}
+                </main>
+            </div>
+
+            {{> partials/footer}}
+        </div>
+    </div>
+</div>
+{{/layouts/base}}

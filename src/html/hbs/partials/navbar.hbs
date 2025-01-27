@@ -1,0 +1,156 @@
+<!-- Navbar -->
+<nav
+    aria-label="secondary"
+    class="sticky top-0 z-10 flex items-center justify-between bg-white px-6 py-2 transition-transform duration-500 dark:bg-dark-eval-1"
+    :class="{
+        '-translate-y-full': scrollingDown,
+        'translate-y-0 shadow-lg': scrollingUp,
+    }"
+>
+    <div class="flex items-center gap-2">
+        <!-- Quick actions menu -->
+        <div x-dropdown>
+            {{#btn
+                variant="transparent"
+                srText="Quick actions"
+                icon="tabler--sparkles"
+                attrs="x-dropdown:trigger"}}
+            {{/btn}}
+
+            <div x-cloak x-dropdown:menu.bottom-start class="z-50 w-48 rounded-md shadow-lg">
+                <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                    <a
+                        href="#"
+                        class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                    >
+                        <span aria-hidden="true" class="iconify h-4 w-4 tabler--users"></span>
+                        <span class="text-sm leading-5">Manage users</span>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                    >
+                        <span aria-hidden="true" class="iconify h-4 w-4 tabler--settings"></span>
+                        <span class="text-sm leading-5">Site settings</span>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                    >
+                        <span aria-hidden="true" class="iconify h-4 w-4 tabler--circle"></span>
+                        <span class="text-sm leading-5">Action 3</span>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="flex items-center gap-2 px-4 py-2 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                    >
+                        <span aria-hidden="true" class="iconify h-4 w-4 tabler--circle"></span>
+                        <span class="text-sm leading-5">Action 4</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search button -->
+        {{#btn
+            variant="transparent"
+            srText="Search"
+            icon="tabler--search"
+            className="hidden md:inline-flex"}}
+        {{/btn}}
+    </div>
+
+    <div class="flex items-center gap-2">
+        <!-- Settings button -->
+        {{#btn
+            variant="transparent"
+            srText="Settings"
+            icon="tabler--settings"}}
+        {{/btn}}
+
+        <!-- Notifications button -->
+        {{#btn
+            variant="transparent"
+            srText="Notifications"
+            icon="tabler--bell"}}
+        {{/btn}}
+
+        <!-- Dark mode button -->
+        {{#btn
+            variant="transparent"
+            srText="Toggle dark mode"
+            className="p-2"
+            attrs='@click="$store.darkMode.toggle()"'
+        }}
+        <!-- Moon icon -->
+        <span x-show="!$store.darkMode.value" class="iconify h-6 w-6 tabler--moon"></span>
+
+        <!-- Sun icon -->
+        <span x-show="$store.darkMode.value" class="iconify h-6 w-6 tabler--sun"></span>
+        {{/btn}}
+
+        <!-- User dropdown menu -->
+        <div x-dropdown>
+            {{#btn
+                variant="transparent"
+                srText="User menu"
+                className="p-0 overflow-hidden"
+                attrs="x-dropdown:trigger"
+            }}
+            <img class="h-10 w-10 rounded-md object-cover" src="/images/avatar.jpeg" alt="User Name" />
+            {{/btn}}
+
+            <div x-cloak x-dropdown:menu.bottom-end class="z-50 w-48 rounded-md shadow-lg">
+                <div class="rounded-md bg-white py-1 ring-1 ring-black ring-opacity-5 dark:bg-dark-eval-2">
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                    >
+                        Profile
+                    </a>
+
+                    <a
+                        href="#"
+                        class="block px-4 py-2 text-sm leading-5 text-gray-800 transition duration-150 ease-in-out hover:bg-primary hover:text-white focus:bg-primary focus:text-white focus:outline-none dark:text-gray-300 dark:hover:bg-primary dark:hover:text-white dark:focus:bg-primary dark:focus:text-white"
+                    >
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile nav -->
+<div
+    class="fixed inset-x-0 bottom-0 z-30 flex items-center justify-between bg-white px-4 py-4 transition-transform duration-500 dark:bg-dark-eval-1 sm:px-6 md:hidden"
+    :class="{
+        'translate-y-full': scrollingDown,
+        'translate-y-0 shadow-t-lg': scrollingUp,
+    }"
+>
+    <!-- Search button -->
+    {{#btn
+        variant="transparent"
+        srText="Search"
+        icon="tabler--search"}}
+    {{/btn}}
+
+    <!-- Logo -->
+    <a href="{{ baseUrl '/' }}">
+        <span class="sr-only">K UI dashboard</span>
+
+        {{> partials/logo }}
+    </a>
+
+    <!-- Sidebar button -->
+    {{#btn
+        variant="transparent"
+        srText="Toggle sidebar"
+        icon="tabler--menu"
+        attrs='@click="$store.sidebar.open()"'}}
+    {{/btn}}
+</div>

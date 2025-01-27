@@ -1,0 +1,16 @@
+{{#base-card className="overflow-hidden"}}
+<div class="flex items-center justify-between p-4">
+    <h4 class="font-medium">{{ ../title }}</h4>
+
+    {{> partials/card-actions-menu }}
+</div>
+
+<div class="flex items-center gap-1 px-4 py-2 opacity-70">
+    <span class="iconify tabler--circle"></span>
+    <span class="text-sm">{{ ../total }}</span>
+</div>
+
+<div class="mt-2 h-24 rounded-b-md" x-data="usageChart($refs.usageChartEl, '{{ title }}')">
+    <div x-ref="usageChartEl"></div>
+</div>
+{{/base-card}}
