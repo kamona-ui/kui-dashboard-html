@@ -33,14 +33,39 @@ export default {
             text = '',
             type = 'button',
             href = null,
+            size = 'base',
         } = context.hash
 
         let baseClasses =
             'inline-flex items-center justify-center gap-2 rounded-md transition-colors font-medium select-none focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 disabled:cursor-not-allowed disabled:opacity-50 '
 
         switch (variant) {
+            case 'white':
+                baseClasses += ' bg-white text-gray-800 hover:bg-gray-100 focus:ring-white'
+                break
+
             case 'black':
+                    baseClasses += ' bg-black text-gray-200 hover:bg-gray-900 focus:ring-black'
+                    break
+
+            case 'secondary':
                 baseClasses += ' bg-black text-gray-200 hover:bg-gray-900 focus:ring-black'
+                break
+
+            case 'success':
+                baseClasses += ' bg-green-500 text-white hover:bg-green-600 focus:ring-green-500'
+                break
+
+            case 'danger':
+                baseClasses += ' bg-red-500 text-white hover:bg-red-600 focus:ring-red-500'
+                break
+
+            case 'warning':
+                baseClasses += ' bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-500'
+                break
+
+            case 'info':
+                baseClasses += ' bg-cyan-500 text-white hover:bg-cyan-600 focus:ring-cyan-500'
                 break
 
             case 'transparent':
@@ -53,11 +78,23 @@ export default {
                 break
         }
 
-        if (icon) {
-            baseClasses += ' p-2'
-        } else {
-            baseClasses += ' px-4 py-2'
+        switch(size) {
+            case 'sm':
+                baseClasses += icon ? ' p-1.5 ' : ' px-2.5 py-1.5 text-sm '
+                break
+            case 'base':
+                baseClasses += icon ? ' p-2 ' : ' px-4 py-2 '
+                break
+            case 'lg':
+                baseClasses += icon ? ' p-3 ' : ' px-5 py-2 text-xl '
+                break
         }
+
+        // if (icon) {
+        //     baseClasses += ' p-2'
+        // } else {
+        //     baseClasses += ' px-4 py-2'
+        // }
 
         const iconSpan = (icon) =>
             `<span aria-hidden="true" class="iconify ${icon} ${iconSizeClasses} ${iconClasses}" ${iconAttrs}></span>`

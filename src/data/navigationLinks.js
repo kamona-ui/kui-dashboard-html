@@ -16,6 +16,17 @@ export default [
         ],
     },
     {
+        title: 'Components',
+        url: null,
+        iconName: 'tabler--grid',
+        links: [
+            {
+                title: 'Buttons',
+                url: 'components/buttons.html',
+            },
+        ],
+    },
+    {
         title: 'Authentication',
         url: null,
         iconName: 'tabler--shield',

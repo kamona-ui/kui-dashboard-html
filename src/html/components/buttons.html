@@ -1,0 +1,38 @@
+{{#> layouts/main pageTitle="Buttons" activeLink="Buttons" group="Components" breadcrumb=components.buttons.breadcrumb}}
+
+{{#*inline "styles"}}{{/inline}} {{#*inline "head-scripts"}}{{/inline}}
+
+{{#*inline "header"}}
+{{> partials/page-header title='Buttons' }}
+{{/inline}}
+
+<div class="grid gap-6 mt-4">
+    {{#each components.buttons.sizes}}
+        <div class="flex flex-wrap items-center gap-6">
+            {{#each ../components.buttons.variants}}
+                {{#btn
+                    variant=this 
+                    size=../this
+                    type="button"
+                    icon="tabler--home"
+                }}{{/btn}}
+            {{/each}}
+        </div>
+    {{/each}}
+
+    {{#each components.buttons.sizes}}
+        <div class="flex flex-wrap items-center gap-6">
+            {{#each ../components.buttons.variants}}
+                {{#btn
+                    variant=this 
+                    size=../this
+                    type="button"
+                }}{{../this}}{{/btn}}
+            {{/each}}
+        </div>
+    {{/each}}
+</div>
+
+{{#*inline "beforeScript"}}{{/inline}} {{#*inline "beforeAlpineStart"}}{{/inline}} {{#*inline "afterScript"}}{{/inline}}
+
+{{/layouts/main}}
