@@ -1,6 +1,6 @@
 ## K UI Admin Dashboard Template (HTML)
 
-> ⚠️ This template is not finished yet. 
+> ## ⚠️ This template has been moved to this [repo](https://github.com/kamona-ui/kui-dashboard/), it will continue to be developed there.
 
 ### [Live preview](https://kamona-ui.github.io/kui-dashboard-html/)
 
